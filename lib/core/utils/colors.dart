@@ -8,4 +8,4 @@ const Color borderAndDivider = Color(0xFFE5E7EB);
 const Color primaryTextColor = Color(0xFF1F2937);
 const Color secounderyTextColor = Color(0xFF6B7280);
 const Color iconColor = Color(0xFF9CA3AF);
-const Color colorButtonSelectedTap = Color(0xff3B82F6);
+const Color colorButtonSelectedTap = Color(0x803B82F6);
