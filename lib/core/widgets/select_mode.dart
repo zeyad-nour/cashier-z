@@ -1,4 +1,4 @@
-import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/mode_button.dart';
+import 'package:cashier_z/core/widgets/mode_button.dart';
 import 'package:flutter/material.dart';
 
 class SelectMode extends StatelessWidget {
