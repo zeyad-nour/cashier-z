@@ -6,15 +6,22 @@ class ListOfProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.sizeOf(context).width * 0.6,
-      height: MediaQuery.sizeOf(context).height * 0.5,
-      color: cardsAndContainers,
-      child: ListView.builder(
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return ProductCardInfo(index: index);
-        },
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Container(
+        width: MediaQuery.sizeOf(context).width * 0.5,
+        height: MediaQuery.sizeOf(context).height * 0.5,
+        decoration: BoxDecoration(
+          color: cardsAndContainers,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: borderAndDivider, width: 1.6),
+        ),
+        child: ListView.builder(
+          itemCount: 30,
+          itemBuilder: (context, index) {
+            return ProductCardInfo(index: index);
+          },
+        ),
       ),
     );
   }
@@ -31,11 +38,26 @@ class ProductCardInfo extends StatelessWidget {
       child: Card(
         color: cardsAndContainers,
         child: ListTile(
-          title: Text('Product ${index + 1}'), //name
+          title: Text(
+            'Product ${index + 1}',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: primaryTextColor,
+            ),
+          ), //name
           subtitle: Text(
             'Description of product ${index + 1}',
+            style: TextStyle(fontSize: 14, color: secounderyTextColor),
           ), //seireal number
-          trailing: Text('\$${(index + 1) * 10}'), //price
+          trailing: Text(
+            '\$${(index + 1) * 10}',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: primaryColor,
+            ),
+          ), //price
         ),
       ),
     );
