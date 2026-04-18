@@ -1,3 +1,4 @@
+import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:cashier_z/core/widgets/mode_button.dart';
 import 'package:flutter/material.dart';
 
@@ -23,13 +24,13 @@ class SelectMode extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ModeButton(
-            title: 'وضع الكاشير',
+            title: cashireMode,
             icon: Icons.shopping_cart_outlined,
             isSelected: selectedIndex == 0,
             onTap: () => onChange(0),
           ),
           ModeButton(
-            title: 'إدارة المنتجات',
+            title: mangeProductsMode,
             icon: Icons.inventory_2_outlined,
             isSelected: selectedIndex == 1,
             onTap: () => onChange(1),
