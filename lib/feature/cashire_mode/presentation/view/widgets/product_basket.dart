@@ -2,15 +2,15 @@ import 'package:cashier_z/core/utils/colors.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/product_card_info.dart';
 import 'package:flutter/material.dart';
 
-class ListOfProducts extends StatelessWidget {
-  const ListOfProducts({super.key});
+class ProductBasket extends StatelessWidget {
+  const ProductBasket({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Container(
-        width: MediaQuery.sizeOf(context).width * 0.5,
+        width: MediaQuery.sizeOf(context).width * 0.4,
         height: MediaQuery.sizeOf(context).height * 0.5,
         decoration: BoxDecoration(
           color: cardsAndContainers,
