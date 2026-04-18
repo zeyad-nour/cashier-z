@@ -22,7 +22,11 @@ class ScanBarCodeField extends StatelessWidget {
             ),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: primaryColor.withOpacity(0.099)),
+            borderSide: BorderSide(
+              color: primaryColor.withOpacity(0.09999),
+              width: 0,
+            ),
+            borderRadius: BorderRadius.circular(8.0),
           ),
           border: OutlineInputBorder(borderSide: BorderSide.none),
 

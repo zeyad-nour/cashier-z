@@ -20,6 +20,8 @@ class _SelectModeState extends State<SelectMode> {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+
         mainAxisSize: MainAxisSize.min,
         children: [
           ModeButton(
