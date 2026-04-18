@@ -1,5 +1,5 @@
 import 'package:cashier_z/core/utils/colors.dart';
-import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/product_card_info.dart';
+import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/Purchases.dart';
 import 'package:flutter/material.dart';
 
 class ProductBasket extends StatelessWidget {
@@ -20,10 +20,14 @@ class ProductBasket extends StatelessWidget {
         child: ListView.builder(
           itemCount: 30,
           itemBuilder: (context, index) {
-            return ProductCardInfo(index: index);
+            return Purchases();
           },
         ),
       ),
     );
   }
 }
+
+
+
+// increase decrease
