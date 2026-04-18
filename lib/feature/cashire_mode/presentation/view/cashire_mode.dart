@@ -1,4 +1,5 @@
-import 'package:cashier_z/core/widgets/custom_app_bar.dart';
+import 'package:cashier_z/core/utils/colors.dart';
+import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/cahire_mode_body.dart';
 import 'package:flutter/material.dart';
 
 class CashireMode extends StatelessWidget {
@@ -6,6 +7,6 @@ class CashireMode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Column(children: [CustomAppBar()]));
+    return Scaffold(backgroundColor: backgroundColor, body: CahireModeBody());
   }
 }
