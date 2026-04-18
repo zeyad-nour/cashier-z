@@ -7,6 +7,6 @@ class CashireMode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: backgroundColor, body: CahireModeBody());
+    return Scaffold(backgroundColor: backgroundColor, body: CashireModeBody());
   }
 }

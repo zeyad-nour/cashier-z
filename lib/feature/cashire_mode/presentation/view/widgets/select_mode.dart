@@ -1,15 +1,15 @@
 import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/mode_button.dart';
 import 'package:flutter/material.dart';
 
-class SelectMode extends StatefulWidget {
-  const SelectMode({super.key});
+class SelectMode extends StatelessWidget {
+  final int selectedIndex;
+  final Function(int) onChange;
 
-  @override
-  State<SelectMode> createState() => _SelectModeState();
-}
-
-class _SelectModeState extends State<SelectMode> {
-  int selectedIndex = 0;
+  const SelectMode({
+    super.key,
+    required this.selectedIndex,
+    required this.onChange,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,29 +20,19 @@ class _SelectModeState extends State<SelectMode> {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-
         mainAxisSize: MainAxisSize.min,
         children: [
           ModeButton(
             title: 'وضع الكاشير',
             icon: Icons.shopping_cart_outlined,
             isSelected: selectedIndex == 0,
-            onTap: () {
-              setState(() {
-                selectedIndex = 0;
-              });
-            },
+            onTap: () => onChange(0),
           ),
           ModeButton(
             title: 'إدارة المنتجات',
             icon: Icons.inventory_2_outlined,
             isSelected: selectedIndex == 1,
-            onTap: () {
-              setState(() {
-                selectedIndex = 1;
-              });
-            },
+            onTap: () => onChange(1),
           ),
         ],
       ),
