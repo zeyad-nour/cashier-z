@@ -1,45 +1,63 @@
-
 // ignore_for_file: file_names
 
-import 'package:cashier_z/core/utils/colors.dart';
-import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/down_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../state_mangement/shopping_basket/card_cubit.dart';
 
 class Purchases extends StatelessWidget {
-  const Purchases({super.key});
+  final CartItem product;
+
+  const Purchases({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Card(
-          color: cardsAndContainers,
-          child: ListTile(
-            title: Text(
-              'name', //name
-              style: TextStyle(
+    return Card(
+      child: ListTile(
+        title: Text(product.product.name),
+
+        subtitle: Text(product.product.barcode),
+
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+
+            /// 🔽 decrease
+            IconButton(
+              onPressed: () {
+                context
+                    .read<CardCubit>()
+                    .decrease(product.product.barcode);
+              },
+              icon: const Icon(Icons.remove),
+            ),
+
+            /// quantity
+            Text(
+              product.quantity.toString(),
+              style: const TextStyle(fontSize: 16),
+            ),
+
+            /// 🔼 increase
+            IconButton(
+              onPressed: () {
+                context
+                    .read<CardCubit>()
+                    .increase(product.product.barcode);
+              },
+              icon: const Icon(Icons.add),
+            ),
+
+            /// 💰 price
+            Text(
+              "${product.product.price * product.quantity}",
+              style: const TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: primaryTextColor,
+                color: Colors.green,
               ),
             ),
-            subtitle: Column(
-              children: [
-                Text(
-                  '15263285818', //seireal number
-                  style: TextStyle(fontSize: 16, color: secounderyTextColor),
-                ),
-                DownWidget(),
-              ],
-            ),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.delete_outlined, color: Colors.red),
-            ), //prices
-          ),
+          ],
         ),
-        // DownWidget(),
-      ],
+      ),
     );
   }
 }

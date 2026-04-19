@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:cashier_z/feature/cashire_mode/data/model/product_model/product_model.dart';
 import 'package:meta/meta.dart';
 
