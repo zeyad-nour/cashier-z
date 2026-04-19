@@ -37,7 +37,7 @@ class _CashireModeBodyState extends State<CashireModeBody> {
 
         const SizedBox(height: 10),
 
-        /// 👇 أهم جزء
+  
         Expanded(
           child: AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),

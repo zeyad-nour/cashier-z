@@ -1,7 +1,5 @@
-import 'package:cashier_z/core/widgets/custom_app_bar.dart';
 import 'package:cashier_z/core/widgets/scan_widget.dart';
-import 'package:cashier_z/feature/cashire_mode/presentation/view/cashire_mode.dart';
-import 'package:cashier_z/core/widgets/select_mode.dart';
+
 import 'package:flutter/material.dart';
 
 class MangeProductsModeBody extends StatelessWidget {
@@ -9,24 +7,6 @@ class MangeProductsModeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const CustomAppBar(),
-
-        SelectMode(
-          selectedIndex: 1,
-          onChange: (index) {
-            if (index == 1) return;
-
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (_) => CashireMode()),
-            );
-          },
-        ),
-        const ScanWidget(),
-        const SizedBox(height: 20),
-      ],
-    );
+    return Column(key: const ValueKey(1), children: const [ScanWidget()]);
   }
 }
