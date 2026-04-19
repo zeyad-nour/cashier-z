@@ -1,10 +1,11 @@
-
 import 'package:cashier_z/core/utils/colors.dart';
+import 'package:cashier_z/feature/cashire_mode/data/model/product_model/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductCardInfo extends StatelessWidget {
-  final int index;
-  const ProductCardInfo({super.key, this.index = 0});
+  final ProductModel product;
+
+  const ProductCardInfo({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +15,27 @@ class ProductCardInfo extends StatelessWidget {
         color: cardsAndContainers,
         child: ListTile(
           title: Text(
-            'Product ${index + 1}',
+            product.name,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               color: primaryTextColor,
             ),
-          ), //name
+          ),
+
           subtitle: Text(
-            'Description of product ${index + 1}',
+            product.barcode,
             style: TextStyle(fontSize: 14, color: secounderyTextColor),
-          ), //seireal number
+          ),
+
           trailing: Text(
-            '\$${(index + 1) * 10}',
+            '\$${product.price}',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               color: primaryColor,
             ),
-          ), //price
+          ),
         ),
       ),
     );
