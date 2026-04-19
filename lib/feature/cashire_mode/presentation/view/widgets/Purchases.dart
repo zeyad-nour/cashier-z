@@ -1,4 +1,6 @@
 
+// ignore_for_file: file_names
+
 import 'package:cashier_z/core/utils/colors.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/down_widget.dart';
 import 'package:flutter/material.dart';
