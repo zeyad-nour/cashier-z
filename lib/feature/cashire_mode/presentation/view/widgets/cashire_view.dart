@@ -9,12 +9,15 @@ class CashierView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       key: const ValueKey(0),
-      children:  [
+      children: [
+        const SizedBox(height: 20),
         ScanWidget(
           onScan: (barcode) {
             // context.read<CardCubit>().scanProduct(barcode);
           },
         ),
+        const SizedBox(height: 20),
+
         OptionsWidget(),
       ],
     );

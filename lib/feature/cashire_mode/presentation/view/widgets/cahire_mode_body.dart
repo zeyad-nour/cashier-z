@@ -24,7 +24,7 @@ class _CashireModeBodyState extends State<CashireModeBody> {
     return Column(
       children: [
         const CustomAppBar(),
-
+        const SizedBox(height: 10),
         SelectMode(
           selectedIndex: selectedIndex,
           onChange: (index) {
@@ -34,7 +34,7 @@ class _CashireModeBodyState extends State<CashireModeBody> {
           },
         ),
 
-        const SizedBox(height: 10),
+        const SizedBox(height: 20),
 
         Expanded(
           child: AnimatedSwitcher(

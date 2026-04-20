@@ -1,7 +1,7 @@
 import 'package:cashier_z/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-import 'purchases.dart';
+import '../purchases.dart';
 
 class ProductBasket extends StatelessWidget {
   const ProductBasket({super.key});
