@@ -13,7 +13,11 @@ class HiveHelper {
   }
 
   static void addProduct(ProductModel product) {
-    getBox().add(product);
+    getBox().put(product.barcode, product); // 👈 مهم
+  }
+
+  static ProductModel? getByBarcode(String barcode) {
+    return getBox().get(barcode);
   }
 
   static void clear() {
