@@ -1,4 +1,4 @@
-
+import 'package:cashier_z/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class InvoiceWidget extends StatelessWidget {
@@ -14,7 +14,7 @@ class InvoiceWidget extends StatelessWidget {
       width: double.infinity,
 
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: cardsAndContainers,
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
