@@ -1,48 +1,51 @@
 import 'package:cashier_z/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 
+import 'package:cashier_z/feature/mange_products_mode/data/models/product_model.dart';
+
 class CardInfoProducts extends StatelessWidget {
-  //name , serial number , price
-  const CardInfoProducts({super.key});
+  final ProductModel product;
+
+  const CardInfoProducts({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(50.0),
-      child: Container(
-        margin: const EdgeInsets.only(bottom: 120),
-        width: MediaQuery.sizeOf(context).width * 0.21,
-        height: 10,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: borderAndDivider, width: 1.5),
-        ),
-        child: Card(
-          color: cardsAndContainers,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                "حليب 1 لتر",
-                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
+    return Container(
+      margin: const EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: borderAndDivider, width: 1.5),
+      ),
+      child: Card(
+        color: cardsAndContainers,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              product.name,
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+            ),
+
+            const SizedBox(height: 10),
+
+            Text(
+              product.barcode,
+              style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+            ),
+
+            const Spacer(),
+
+            const Divider(),
+
+            Text(
+              "${product.price} EGP",
+              style: const TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+                color: primaryColor,
               ),
-              SizedBox(height: 20),
-              Text(
-                "123456789",
-                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
-              ),
-              Spacer(),
-              Divider(),
-              Text(
-                "السعر",
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 25,
-                  color: primaryColor,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

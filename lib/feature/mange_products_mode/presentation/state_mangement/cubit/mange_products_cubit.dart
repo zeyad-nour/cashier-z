@@ -8,7 +8,9 @@ import 'package:cashier_z/feature/mange_products_mode/data/models/product_model.
 part 'mange_products_state.dart';
 
 class MangeProductsCubit extends Cubit<MangeProductsState> {
-  MangeProductsCubit() : super(MangeProductsInitial());
+  MangeProductsCubit() : super(MangeProductsInitial()){
+      loadProducts();
+  }
 
   // =========================
   // Load all products
@@ -24,15 +26,11 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
   void scanBarcode(String barcode) {
     emit(ProductLoading());
 
-    final products = HiveHelper.getProducts();
+    final product = HiveHelper.getByBarcode(barcode);
 
-    try {
-      final product = products.firstWhere(
-        (p) => p.barcode == barcode,
-      );
-
+    if (product != null) {
       emit(ProductFound(product));
-    } catch (e) {
+    } else {
       emit(ProductNotFound(barcode));
     }
   }
@@ -45,32 +43,36 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     required String barcode,
     required double price,
   }) {
-    final product = ProductModel(
-      name: name,
-      barcode: barcode,
-      price: price,
-    );
+    final existing = HiveHelper.getByBarcode(barcode);
+
+    if (existing != null) {
+      emit(ProductFound(existing));
+      return;
+    }
+
+    final product = ProductModel(name: name, barcode: barcode, price: price);
 
     HiveHelper.addProduct(product);
 
     emit(ProductAdded(product));
-
-    // refresh list
     loadProducts();
   }
 
   // =========================
   // Update price (important for cashier mode too)
   // =========================
-  void updatePrice({
-    required ProductModel product,
-    required double newPrice,
-  }) {
+  void updatePrice({required String barcode, required double newPrice}) {
+    final product = HiveHelper.getByBarcode(barcode);
+
+    if (product == null) {
+      emit(ProductNotFound(barcode));
+      return;
+    }
+
     product.price = newPrice;
-    product.save(); // HiveObject method
+    product.save();
 
     emit(ProductUpdated());
-
     loadProducts();
   }
 }
