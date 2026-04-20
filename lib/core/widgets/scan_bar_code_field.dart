@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 
 class ScanBarCodeField extends StatelessWidget {
+  
   final Function(String value)? onScan;
 
   const ScanBarCodeField({super.key, this.onScan});

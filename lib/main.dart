@@ -1,4 +1,3 @@
-import 'package:cashier_z/feature/cashire_mode/data/model/product_model/product_model.dart';
 
 import 'package:cashier_z/feature/cashire_mode/presentation/view/cashire_mode.dart';
 import 'package:flutter/material.dart';

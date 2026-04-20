@@ -7,38 +7,42 @@ class CardInfoProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.sizeOf(context).width * 0.21,
-      height: MediaQuery.sizeOf(context).height * 0.22,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: borderAndDivider, width: 1.5),
-      ),
-      child: Card(
-        color: cardsAndContainers,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              "حليب 1 لتر",
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
-            ),
-            SizedBox(height: 20),
-            Text(
-              "123456789",
-              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
-            ),
-            Spacer(),
-            Divider(),
-            Text(
-              "السعر",
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 25,
-                color: primaryColor,
+    return Padding(
+      padding: const EdgeInsets.all(50.0),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 120),
+        width: MediaQuery.sizeOf(context).width * 0.21,
+        height: 10,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: borderAndDivider, width: 1.5),
+        ),
+        child: Card(
+          color: cardsAndContainers,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text(
+                "حليب 1 لتر",
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
               ),
-            ),
-          ],
+              SizedBox(height: 20),
+              Text(
+                "123456789",
+                style: TextStyle(fontWeight: FontWeight.w400, fontSize: 15),
+              ),
+              Spacer(),
+              Divider(),
+              Text(
+                "السعر",
+                style: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  fontSize: 25,
+                  color: primaryColor,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
