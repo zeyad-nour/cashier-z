@@ -7,6 +7,11 @@ class MangeProductsModeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(key: const ValueKey(1), children: const [ScanWidget()]);
+    return Column(key: const ValueKey(1), children:  [ScanWidget(
+  onScan: (barcode) {
+    // هنا هتفتح form لإضافة name + price
+    // context.read<ProductCubit>().prepareNewProduct(barcode);
+  },
+)]);
   }
 }

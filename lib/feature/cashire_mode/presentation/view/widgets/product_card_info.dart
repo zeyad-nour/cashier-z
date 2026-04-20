@@ -1,11 +1,9 @@
 import 'package:cashier_z/core/utils/colors.dart';
-import 'package:cashier_z/feature/cashire_mode/data/model/product_model/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductCardInfo extends StatelessWidget {
-  final ProductModel product;
 
-  const ProductCardInfo({super.key, required this.product});
+  const ProductCardInfo({super.key, });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +13,7 @@ class ProductCardInfo extends StatelessWidget {
         color: cardsAndContainers,
         child: ListTile(
           title: Text(
-            product.name,
+         "   product.name",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -24,12 +22,12 @@ class ProductCardInfo extends StatelessWidget {
           ),
 
           subtitle: Text(
-            product.barcode,
+           " product.barcode",
             style: TextStyle(fontSize: 14, color: secounderyTextColor),
           ),
 
           trailing: Text(
-            '\$${product.price}',
+            "trailing",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,

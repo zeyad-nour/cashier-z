@@ -1,38 +1,30 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:cashier_z/core/utils/app_strings.dart';
-import 'package:cashier_z/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 
+
 class ScanBarCodeField extends StatelessWidget {
-  const ScanBarCodeField({super.key});
+  final Function(String value)? onScan;
+
+  const ScanBarCodeField({super.key, this.onScan});
 
   @override
   Widget build(BuildContext context) {
+    final controller = TextEditingController();
+
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.5,
-      height: MediaQuery.of(context).size.height * 0.08,
-
       child: TextFormField(
+        controller: controller,
+        onFieldSubmitted: (value) {
+          if (onScan != null) {
+            onScan!(value);
+          }
+        },
         decoration: InputDecoration(
-          fillColor: primaryLight,
-          filled: true,
-          hint: Center(
-            child: Text(
-              titleFieldScan,
-              style: const TextStyle(fontSize: 18, color: secounderyTextColor),
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: primaryColor.withOpacity(0.09999),
-              width: 0,
-            ),
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          border: OutlineInputBorder(borderSide: BorderSide.none),
-
-          prefixIcon: const Icon(Icons.qr_code_scanner, color: primaryColor),
+          hintText: titleFieldScan,
+          prefixIcon: const Icon(Icons.qr_code_scanner),
         ),
       ),
     );

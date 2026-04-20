@@ -1,21 +1,18 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../state_mangement/shopping_basket/card_cubit.dart';
 
 class Purchases extends StatelessWidget {
-  final CartItem product;
 
-  const Purchases({super.key, required this.product});
+  const Purchases({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(product.product.name),
+        title: Text("product.name"),
 
-        subtitle: Text(product.product.barcode),
+        subtitle: Text("product.barcode"),
 
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
@@ -24,32 +21,28 @@ class Purchases extends StatelessWidget {
             /// 🔽 decrease
             IconButton(
               onPressed: () {
-                context
-                    .read<CardCubit>()
-                    .decrease(product.product.barcode);
+              
               },
               icon: const Icon(Icons.remove),
             ),
 
             /// quantity
             Text(
-              product.quantity.toString(),
+            "quantity",
               style: const TextStyle(fontSize: 16),
             ),
 
             /// 🔼 increase
             IconButton(
               onPressed: () {
-                context
-                    .read<CardCubit>()
-                    .increase(product.product.barcode);
+               
               },
               icon: const Icon(Icons.add),
             ),
 
             /// 💰 price
             Text(
-              "${product.product.price * product.quantity}",
+              "Price",
               style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.green,
