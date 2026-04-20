@@ -2,8 +2,7 @@ import 'package:cashier_z/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class ProductCardInfo extends StatelessWidget {
-
-  const ProductCardInfo({super.key, });
+  const ProductCardInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +12,7 @@ class ProductCardInfo extends StatelessWidget {
         color: cardsAndContainers,
         child: ListTile(
           title: Text(
-         "   product.name",
+            "product Name",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
@@ -22,12 +21,12 @@ class ProductCardInfo extends StatelessWidget {
           ),
 
           subtitle: Text(
-           " product.barcode",
+            "serail Number",
             style: TextStyle(fontSize: 14, color: secounderyTextColor),
           ),
 
           trailing: Text(
-            "trailing",
+            "price",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
