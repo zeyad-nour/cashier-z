@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductsGridView extends StatelessWidget {
-  // final List<Map<String, dynamic>> products;
-
   const ProductsGridView({super.key});
 
   @override
@@ -19,22 +17,30 @@ class ProductsGridView extends StatelessWidget {
         if (state is ProductsLoaded) {
           products = state.products;
         }
-       return GridView.builder(
-          itemCount: 20,
+
+        if (products.isEmpty) {
+          return const Center(
+            child: Text("No Products Yet"),
+          );
+        }
+
+        return GridView.builder(
+          shrinkWrap: true,
+          physics: const BouncingScrollPhysics(),
+          itemCount: products.length, // 👈 مهم جدًا
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3, // 👈 3 في الصف
+            crossAxisCount: 3,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            childAspectRatio: 0.8, // 👈 شكل الكارت
+            childAspectRatio: 0.8,
           ),
           itemBuilder: (context, index) {
-            // final product = products[index];
-
-            return CardInfoProducts(product: products[index],);
+            return CardInfoProducts(
+              product: products[index],
+            );
           },
         );
       },
     );
-  
   }
 }

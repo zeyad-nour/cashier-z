@@ -23,17 +23,18 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
   // =========================
   // Scan / Search product
   // =========================
-  void scanBarcode(String barcode) {
-    emit(ProductLoading());
+void scanBarcode(String barcode) {
+  final product = HiveHelper.getByBarcode(barcode);
 
-    final product = HiveHelper.getByBarcode(barcode);
-
-    if (product != null) {
-      emit(ProductFound(product));
-    } else {
-      emit(ProductNotFound(barcode));
-    }
+  if (product != null) {
+    emit(ProductFound(product));
+  } else {
+    emit(ProductNotFound(barcode));
   }
+
+  // 👇 مهم جدًا: refresh list بعد أي scan
+  loadProducts();
+}
 
   // =========================
   // Add new product

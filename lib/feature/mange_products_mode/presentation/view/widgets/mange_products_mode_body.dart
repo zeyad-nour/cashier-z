@@ -23,9 +23,7 @@ class MangeProductsModeBody extends StatelessWidget {
 
         const NumberOfProduct(),
 
-        const Expanded(
-          child: ProductsGridView(),
-        ),
+        const Expanded(child: ProductsGridView()),
       ],
     );
   }

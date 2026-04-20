@@ -21,12 +21,9 @@ class NumberOfProduct extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Row(
             children: [
-              Text(
+              const Text(
                 listProduct,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                ),
+                style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
               ),
               const Spacer(),
               Container(
@@ -38,7 +35,7 @@ class NumberOfProduct extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
-                  "$count",
+                  "$count", // 👈 dynamic
                   style: const TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 20,

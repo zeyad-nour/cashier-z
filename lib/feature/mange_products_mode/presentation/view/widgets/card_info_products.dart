@@ -1,7 +1,6 @@
 import 'package:cashier_z/core/utils/colors.dart';
-import 'package:flutter/material.dart';
-
 import 'package:cashier_z/feature/mange_products_mode/data/models/product_model.dart';
+import 'package:flutter/material.dart';
 
 class CardInfoProducts extends StatelessWidget {
   final ProductModel product;
@@ -23,14 +22,20 @@ class CardInfoProducts extends StatelessWidget {
           children: [
             Text(
               product.name,
-              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+              style: const TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 22,
+              ),
             ),
 
             const SizedBox(height: 10),
 
             Text(
               product.barcode,
-              style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+              style: const TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+              ),
             ),
 
             const Spacer(),
