@@ -1,3 +1,4 @@
+import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -15,36 +16,31 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
   pdf.addPage(
     pw.Page(
       pageFormat: PdfPageFormat.roll80,
-      theme: pw.ThemeData.withFont(
-        base: arabicFont,
-        bold: arabicBold,
-      ),
+      theme: pw.ThemeData.withFont(base: arabicFont, bold: arabicBold),
       build: (context) {
         return pw.Directionality(
           textDirection: pw.TextDirection.rtl,
           child: pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.center,
             children: [
-
               /// 🏪 HEADER
               pw.Text(
-                "كاشير زد ستور\nCASHIER Z STORE",
+                brandName,
                 textAlign: pw.TextAlign.center,
                 style: pw.TextStyle(
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: pw.FontWeight.bold,
                 ),
               ),
 
               pw.SizedBox(height: 5),
 
-              pw.Text("نظام نقاط بيع حديث | Modern POS System"),
-
               pw.SizedBox(height: 10),
+              pw.Divider(),
 
               /// 📞 INFO
-              pw.Text("📞 01001386275 / 01090201040"),
-              pw.Text("📍 سوهاج - البلينا - الحرجة بالقرعان"),
+              pw.Text(" 01001386275 / 01090201040"),
+              pw.Text(" سوهاج - البلينا - الحرجة بالقرعان"),
 
               pw.Divider(),
 
@@ -52,10 +48,14 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text("الإجمالي / Total",
-                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                  pw.Text("الصنف / Item",
-                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  pw.Text(
+                    "الإجمالي / Total\t",
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                  ),
+                  pw.Text(
+                    "الصنف / Item\t",
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                  ),
                 ],
               ),
 
@@ -96,9 +96,9 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
               pw.Divider(),
 
               /// 📦 SERVICES
-              pw.Text("📱 خدمة فودافون كاش متاحة | Vodafone Cash Available"),
-              pw.Text("🚚 خدمة توصيل مجانية | Free Delivery"),
-              pw.Text("⏰ الخدمة 24 ساعة | 24 Hours Service"),
+              pw.Text(" خدمة فودافون كاش متاحة | Vodafone Cash Available"),
+              pw.Text(" خدمة توصيل مجانية | Free Delivery"),
+              pw.Text(" الخدمة 24 ساعة | 24 Hours Service"),
 
               pw.SizedBox(height: 10),
 
@@ -107,7 +107,8 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
                 barcode: pw.Barcode.qrCode(),
                 width: 120,
                 height: 120,
-                data: '''
+                data:
+                    '''
 CASHIER Z STORE
 Invoice: $invoiceId
 Total: ${total.toStringAsFixed(2)}
@@ -115,11 +116,17 @@ Total: ${total.toStringAsFixed(2)}
               ),
 
               pw.SizedBox(height: 10),
-
+              pw.Divider(), pw.Divider(),
               pw.Text(
-                "شكراً لزيارتكم ❤️ | Thank You",
+                "شكراً لزيارتكم  | Thank You",
                 textAlign: pw.TextAlign.center,
               ),
+              pw.Text("Developed By\n", style: pw.TextStyle(fontSize: 12)),
+              pw.Text(
+                "Eng.Zeyad Ahmed Nour",
+                style: pw.TextStyle(fontSize: 10),
+              ),
+              pw.Text("01090201040", style: pw.TextStyle(fontSize: 10)),
             ],
           ),
         );
@@ -127,7 +134,5 @@ Total: ${total.toStringAsFixed(2)}
     ),
   );
 
-  await Printing.layoutPdf(
-    onLayout: (format) async => pdf.save(),
-  );
+  await Printing.layoutPdf(onLayout: (format) async => pdf.save());
 }
