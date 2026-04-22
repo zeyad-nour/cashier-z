@@ -11,55 +11,56 @@ class MangeProductsModeBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  return BlocListener<MangeProductsCubit, MangeProductsState>(
-  listener: (context, state) {
-    if (state is ProductNotFound) {
-      showDialog(
-        context: context,
-        builder: (_) => AddOrUpdateProductDialog(
-          barcode: state.barcode,
-          isUpdate: false,
-          onSubmit: (name, price) {
-            context.read<MangeProductsCubit>().addProduct(
+    return BlocListener<MangeProductsCubit, MangeProductsState>(
+      listener: (context, state) {
+        if (state is ProductNotFound) {
+          showDialog(
+
+            context: context,
+            builder: (_) => AddOrUpdateProductDialog(
+              barcode: state.barcode,
+              isUpdate: false,
+              onSubmit: (name, price) {
+                context.read<MangeProductsCubit>().addProduct(
                   name: name,
                   barcode: state.barcode,
                   price: price,
                 );
-          },
-        ),
-      );
-    }
+              },
+            ),
+          );
+        }
 
-    if (state is ProductFound) {
-      showDialog(
-        context: context,
-        builder: (_) => AddOrUpdateProductDialog(
-          barcode: state.product.barcode,
-          name: state.product.name,
-          price: state.product.price,
-          isUpdate: true,
-          onSubmit: (_, price) {
-            context.read<MangeProductsCubit>().updatePrice(
+        if (state is ProductFound) {
+          showDialog(
+            context: context,
+            builder: (_) => AddOrUpdateProductDialog(
+              barcode: state.product.barcode,
+              name: state.product.name,
+              price: state.product.price,
+              isUpdate: true,
+              onSubmit: (_, price) {
+                context.read<MangeProductsCubit>().updatePrice(
                   barcode: state.product.barcode,
                   newPrice: price,
                 );
-          },
-        ),
-      );
-    }
-  },
-  child: Column(
-    children: [
-      ScanWidget(
-        onScan: (barcode) {
-          context.read<MangeProductsCubit>().scanBarcode(barcode);
-        },
+              },
+            ),
+          );
+        }
+      },
+      child: Column(
+        children: [
+          ScanWidget(
+            onScan: (barcode) {
+              context.read<MangeProductsCubit>().scanBarcode(barcode);
+            },
+          ),
+          const SizedBox(height: 20),
+          const NumberOfProduct(),
+          const Expanded(child: ProductsGridView()),
+        ],
       ),
-      const SizedBox(height: 20),
-      const NumberOfProduct(),
-      const Expanded(child: ProductsGridView()),
-    ],
-  ),
-);
+    );
   }
 }
