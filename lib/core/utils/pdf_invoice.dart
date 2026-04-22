@@ -32,8 +32,6 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
                 ),
               ),
 
-        
-
               pw.SizedBox(height: 8),
 
               pw.Divider(),
@@ -115,24 +113,23 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
               /// 📦 SERVICES
               pw.Text(" متاح instapay : 01154798555"),
               pw.Text(" متاح كاش : 01154795556"),
-              pw.Text(" خدمة توصيل مجانية | Free Delivery"),
+              pw.Text(" خدمة توصيل  |  Delivery"),
               pw.Text(" خدمة 24 ساعة | 24 Hours Service"),
 
               pw.SizedBox(height: 10),
 
               /// 📊 QR CODE
-//               pw.BarcodeWidget(
-//                 barcode: pw.Barcode.qrCode(),
-//                 width: 120,
-//                 height: 120,
-//                 data:
-//                     '''
-// STORE: $brandName
-// INVOICE: $invoiceId
-// TOTAL: ${total.toStringAsFixed(2)}
-// ''',
-//               ),
-
+              //               pw.BarcodeWidget(
+              //                 barcode: pw.Barcode.qrCode(),
+              //                 width: 120,
+              //                 height: 120,
+              //                 data:
+              //                     '''
+              // STORE: $brandName
+              // INVOICE: $invoiceId
+              // TOTAL: ${total.toStringAsFixed(2)}
+              // ''',
+              //               ),
               pw.SizedBox(height: 10),
 
               pw.Divider(),
@@ -143,7 +140,6 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
                 "Developed By: Eng. Zeyad Ahmed Nour",
                 style: pw.TextStyle(fontSize: 7),
               ),
-          
             ],
           ),
         );
