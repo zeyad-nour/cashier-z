@@ -7,7 +7,7 @@ class InvoiceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 🔥 mock data مؤقت
-    double totalPrice = 150.75;
+    double totalPrice = 0;
 
     return Container(
       padding: const EdgeInsets.all(16),
