@@ -6,9 +6,6 @@ import 'package:cashier_z/feature/mange_products_mode/data/local/hive_helper.dar
 class ReceiptCubit extends Cubit<ReceiptState> {
   ReceiptCubit() : super(const ReceiptState());
 
-  // =========================
-  // Scan product
-  // =========================
   void scan(String barcode) {
     final product = HiveHelper.getByBarcode(barcode);
 
@@ -31,9 +28,6 @@ class ReceiptCubit extends Cubit<ReceiptState> {
     emit(state.copyWith(items: items));
   }
 
-  // =========================
-  // Increase quantity
-  // =========================
   void increase(int index) {
     final items = List<CartItem>.from(state.items);
 
@@ -44,9 +38,6 @@ class ReceiptCubit extends Cubit<ReceiptState> {
     emit(state.copyWith(items: items));
   }
 
-  // =========================
-  // Decrease quantity
-  // =========================
   void decrease(int index) {
     final items = List<CartItem>.from(state.items);
 
@@ -62,9 +53,6 @@ class ReceiptCubit extends Cubit<ReceiptState> {
     emit(state.copyWith(items: items));
   }
 
-  // =========================
-  // Clear cart
-  // =========================
   void clear() {
     emit(const ReceiptState());
   }
