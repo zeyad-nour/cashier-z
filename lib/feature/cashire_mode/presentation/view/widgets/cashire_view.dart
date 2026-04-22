@@ -10,33 +10,30 @@ class CashierView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => ReceiptCubit(),
-      child: Column(
-        children: [
-          const SizedBox(height: 20),
-
-          Expanded(
-            child: Column(
-              children: [
-                ScanWidget(
-                  onScan: (barcode) {
-                    context.read<ReceiptCubit>().scan(barcode);
-                  },
-                ),
-
-                const SizedBox(height: 20),
-
-                const OptionsWidget(),
-              ],
-            ),
+    return Column(
+      children: [
+        const SizedBox(height: 20),
+    
+        Expanded(
+          child: Column(
+            children: [
+              ScanWidget(
+                onScan: (barcode) {
+                  context.read<ReceiptCubit>().scan(barcode);
+                },
+              ),
+    
+              const SizedBox(height: 20),
+    
+              const OptionsWidget(),
+            ],
           ),
-
-          const SizedBox(height: 10),
-
-          const InvoiceWidget(),
-        ],
-      ),
+        ),
+    
+        const SizedBox(height: 10),
+    
+        const InvoiceWidget(),
+      ],
     );
   }
 }
