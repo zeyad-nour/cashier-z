@@ -53,6 +53,27 @@ class ReceiptCubit extends Cubit<ReceiptState> {
     emit(state.copyWith(items: items));
   }
 
+
+
+  String buildInvoiceText() {
+  final buffer = StringBuffer();
+
+  buffer.writeln("Cashier Z Store");
+  buffer.writeln("Phone: 01090201040");
+  buffer.writeln("----------------------");
+
+  for (final item in state.items) {
+  buffer.writeln(
+  "${item.product.name} x${item.quantity} = ${item.total.toStringAsFixed(2)}",
+);
+  }
+
+  buffer.writeln("----------------------");
+  buffer.writeln("TOTAL: ${state.total.toStringAsFixed(2)}");
+  return buffer.toString();
+}
+
+
   void clear() {
     emit(const ReceiptState());
   }
