@@ -1,3 +1,4 @@
+import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -16,7 +17,7 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
             // 🏪 Shop Header
             pw.Center(
               child: pw.Text(
-                "Cashier Z Store",
+                brandName,
                 style: pw.TextStyle(
                   fontSize: 18,
                   fontWeight: pw.FontWeight.bold,

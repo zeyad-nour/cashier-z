@@ -8,13 +8,11 @@ import 'package:cashier_z/feature/mange_products_mode/presentation/state_mangeme
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Hive.initFlutter();
-
   Hive.registerAdapter(ProductModelAdapter());
-
   await Hive.openBox<ProductModel>('products_box');
 
+  
   runApp(const MyApp());
 }
 
