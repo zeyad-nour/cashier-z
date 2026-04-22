@@ -3,11 +3,12 @@ import 'package:cashier_z/feature/cashire_mode/data/model/cart_item.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/state_mangement/cubit/receipt_state.dart';
 import 'package:cashier_z/feature/mange_products_mode/data/local/hive_helper.dart';
 
-
-
 class ReceiptCubit extends Cubit<ReceiptState> {
   ReceiptCubit() : super(const ReceiptState());
 
+  // =========================
+  // Scan product
+  // =========================
   void scan(String barcode) {
     final product = HiveHelper.getByBarcode(barcode);
 
@@ -20,7 +21,9 @@ class ReceiptCubit extends Cubit<ReceiptState> {
     );
 
     if (index != -1) {
-      items[index].quantity++;
+      final item = items[index];
+      items[index] =
+          item.copyWith(quantity: item.quantity + 1);
     } else {
       items.add(CartItem(product: product));
     }
@@ -28,17 +31,30 @@ class ReceiptCubit extends Cubit<ReceiptState> {
     emit(state.copyWith(items: items));
   }
 
+  // =========================
+  // Increase quantity
+  // =========================
   void increase(int index) {
     final items = List<CartItem>.from(state.items);
-    items[index].quantity++;
+
+    final item = items[index];
+    items[index] =
+        item.copyWith(quantity: item.quantity + 1);
+
     emit(state.copyWith(items: items));
   }
 
+  // =========================
+  // Decrease quantity
+  // =========================
   void decrease(int index) {
     final items = List<CartItem>.from(state.items);
 
-    if (items[index].quantity > 1) {
-      items[index].quantity--;
+    final item = items[index];
+
+    if (item.quantity > 1) {
+      items[index] =
+          item.copyWith(quantity: item.quantity - 1);
     } else {
       items.removeAt(index);
     }
@@ -46,6 +62,9 @@ class ReceiptCubit extends Cubit<ReceiptState> {
     emit(state.copyWith(items: items));
   }
 
+  // =========================
+  // Clear cart
+  // =========================
   void clear() {
     emit(const ReceiptState());
   }
