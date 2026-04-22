@@ -10,30 +10,3 @@ const String printInvoice = 'طباعة الفاتورة';
 const String totalPrice = 'السعر الكلي';  
 const String clearBasketButton = 'تفريغ السلة';  
 
-
-// BlocListener<MangeProductsCubit, MangeProductsState>(
-//   listener: (context, state) {
-//     if (state is ScanResult) {
-//       if (state.product != null) {
-//         ScaffoldMessenger.of(context).showSnackBar(
-//           SnackBar(content: Text("Product Found: ${state.product!.name}")),
-//         );
-//       } else {
-//         // منتج جديد
-//         _showAddProductDialog(context, state.barcode);
-//       }
-//     }
-//   },
-//   child: Column(
-//     children: [
-//       ScanWidget(
-//         onScan: (barcode) {
-//           context.read<MangeProductsCubit>().scanBarcode(barcode);
-//         },
-//       ),
-//       const SizedBox(height: 20),
-//       const NumberOfProduct(),
-//       const Expanded(child: ProductsGridView()),
-//     ],
-//   ),
-// )

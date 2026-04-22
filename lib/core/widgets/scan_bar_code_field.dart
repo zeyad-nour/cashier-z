@@ -1,7 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
-
 
 class ScanBarCodeField extends StatefulWidget {
   final Function(String value)? onScan;
@@ -32,7 +32,7 @@ class _ScanBarCodeFieldState extends State<ScanBarCodeField> {
           controller.clear(); // مهم للكاشير
         },
         decoration: const InputDecoration(
-          hintText: "Scan or enter barcode",
+          hintText: titleFieldScan,
           prefixIcon: Icon(Icons.qr_code_scanner),
         ),
       ),

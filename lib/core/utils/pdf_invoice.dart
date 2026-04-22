@@ -26,7 +26,7 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
             ),
 
             pw.Center(
-              child: pw.Text("Tel: 01090201040"),
+              child: pw.Text("Tel: 01001386275"),
             ),
 
             pw.Divider(),
