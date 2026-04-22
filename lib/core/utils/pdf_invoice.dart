@@ -9,7 +9,6 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
 
   final invoiceId = DateTime.now().millisecondsSinceEpoch.toString();
 
-  /// ✅ Arabic Fonts (IMPORTANT FIX)
   final arabicFont = await PdfGoogleFonts.notoNaskhArabicRegular();
   final arabicBold = await PdfGoogleFonts.notoNaskhArabicBold();
 
@@ -33,57 +32,76 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
                 ),
               ),
 
-              pw.SizedBox(height: 5),
+              pw.SizedBox(height: 4),
+              pw.Text("Developed By: Eng. Zeyad Ahmed Nour"),
+              pw.SizedBox(height: 8),
 
-              pw.SizedBox(height: 10),
               pw.Divider(),
 
               /// 📞 INFO
-              pw.Text(" 01001386275 / 01090201040"),
-              pw.Text(" سوهاج - البلينا - الحرجة بالقرعان"),
+              pw.Text("01001386275 / 01090201040"),
+              pw.Text("سوهاج - البلينا - الحرجة بالقرعان"),
 
               pw.Divider(),
 
-              /// 🧾 HEADER
+              /// 🧾 TABLE HEADER (FIXED ALIGNMENT)
               pw.Row(
-                mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text(
-                    "الإجمالي / Total\t",
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                  pw.Expanded(
+                    flex: 3,
+                    child: pw.Text(
+                      "الصنف / Item",
+                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                      textAlign: pw.TextAlign.right,
+                    ),
                   ),
-                  pw.Text(
-                    "الصنف / Item\t",
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                  pw.Expanded(
+                    flex: 1,
+                    child: pw.Text(
+                      "الإجمالي",
+                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                      textAlign: pw.TextAlign.center,
+                    ),
                   ),
                 ],
               ),
 
               pw.Divider(),
 
-              /// 🛒 ITEMS
+              /// 🛒 ITEMS (FIXED ALIGNMENT)
               ...items.map(
-                (item) => pw.Row(
-                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                  children: [
-                    pw.Text(item.total.toStringAsFixed(2)),
-                    pw.Expanded(
-                      child: pw.Text(
-                        "${item.product.name} x${item.quantity}",
-                        textAlign: pw.TextAlign.right,
+                (item) => pw.Padding(
+                  padding: const pw.EdgeInsets.symmetric(vertical: 3),
+                  child: pw.Row(
+                    children: [
+                      pw.Expanded(
+                        flex: 3,
+                        child: pw.Text(
+                          "${item.product.name} x${item.quantity}",
+                          textAlign: pw.TextAlign.right,
+                          style: const pw.TextStyle(fontSize: 10),
+                        ),
                       ),
-                    ),
-                  ],
+                      pw.Expanded(
+                        flex: 1,
+                        child: pw.Text(
+                          item.total.toStringAsFixed(2),
+                          textAlign: pw.TextAlign.center,
+                          style: const pw.TextStyle(fontSize: 10),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
 
               pw.Divider(),
 
               /// 💰 TOTAL
-              pw.Align(
+              pw.Container(
                 alignment: pw.Alignment.centerRight,
                 child: pw.Text(
-                  "الإجمالي / TOTAL: ${total.toStringAsFixed(2)} EGP",
+                  "الإجمالي النهائي: ${total.toStringAsFixed(2)} EGP",
                   style: pw.TextStyle(
                     fontSize: 14,
                     fontWeight: pw.FontWeight.bold,
@@ -96,34 +114,33 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
               pw.Divider(),
 
               /// 📦 SERVICES
-              pw.Text(" خدمة فودافون كاش متاحة | Vodafone Cash Available"),
+              pw.Text(" فودافون كاش متاح | Vodafone Cash Available"),
               pw.Text(" خدمة توصيل مجانية | Free Delivery"),
-              pw.Text(" الخدمة 24 ساعة | 24 Hours Service"),
+              pw.Text(" خدمة 24 ساعة | 24 Hours Service"),
 
               pw.SizedBox(height: 10),
 
-              /// 📊 QR
+              /// 📊 QR CODE
               pw.BarcodeWidget(
                 barcode: pw.Barcode.qrCode(),
                 width: 120,
                 height: 120,
                 data:
                     '''
-CASHIER Z STORE
-Invoice: $invoiceId
-Total: ${total.toStringAsFixed(2)}
+STORE: $brandName
+INVOICE: $invoiceId
+TOTAL: ${total.toStringAsFixed(2)}
 ''',
               ),
 
               pw.SizedBox(height: 10),
-              pw.Divider(), pw.Divider(),
+
+              pw.Divider(),
+
+              /// 👨‍💻 SIGNATURE
+              pw.Text("شكراً لزيارتكم ", textAlign: pw.TextAlign.center),
               pw.Text(
-                "شكراً لزيارتكم  | Thank You",
-                textAlign: pw.TextAlign.center,
-              ),
-              pw.Text("Developed By\n", style: pw.TextStyle(fontSize: 12)),
-              pw.Text(
-                "Eng.Zeyad Ahmed Nour",
+                "Developed By: Eng. Zeyad Ahmed Nour",
                 style: pw.TextStyle(fontSize: 10),
               ),
               pw.Text("01090201040", style: pw.TextStyle(fontSize: 10)),
