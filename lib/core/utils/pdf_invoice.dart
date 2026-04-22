@@ -8,15 +8,24 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
 
   final invoiceId = DateTime.now().millisecondsSinceEpoch.toString();
 
+  /// ✅ Arabic Fonts (IMPORTANT FIX)
+  final arabicFont = await PdfGoogleFonts.notoNaskhArabicRegular();
+  final arabicBold = await PdfGoogleFonts.notoNaskhArabicBold();
+
   pdf.addPage(
     pw.Page(
       pageFormat: PdfPageFormat.roll80,
+      theme: pw.ThemeData.withFont(
+        base: arabicFont,
+        bold: arabicBold,
+      ),
       build: (context) {
         return pw.Directionality(
-          textDirection: pw.TextDirection.rtl, // 🇸🇦 عربي + إنجليزي دعم أفضل
+          textDirection: pw.TextDirection.rtl,
           child: pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.center,
             children: [
+
               /// 🏪 HEADER
               pw.Text(
                 "كاشير زد ستور\nCASHIER Z STORE",
@@ -39,18 +48,14 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
 
               pw.Divider(),
 
-              /// 🧾 ITEMS HEADER
+              /// 🧾 HEADER
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text(
-                    "الإجمالي / Total",
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-                  ),
-                  pw.Text(
-                    "الصنف / Item",
-                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
-                  ),
+                  pw.Text("الإجمالي / Total",
+                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  pw.Text("الصنف / Item",
+                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
                 ],
               ),
 
@@ -61,15 +66,11 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
                 (item) => pw.Row(
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    pw.Text(
-                      item.total.toStringAsFixed(2),
-                      style: const pw.TextStyle(fontSize: 10),
-                    ),
+                    pw.Text(item.total.toStringAsFixed(2)),
                     pw.Expanded(
                       child: pw.Text(
                         "${item.product.name} x${item.quantity}",
                         textAlign: pw.TextAlign.right,
-                        style: const pw.TextStyle(fontSize: 10),
                       ),
                     ),
                   ],
@@ -101,13 +102,12 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
 
               pw.SizedBox(height: 10),
 
-              /// 📊 QR CODE
+              /// 📊 QR
               pw.BarcodeWidget(
                 barcode: pw.Barcode.qrCode(),
                 width: 120,
                 height: 120,
-                data:
-                    '''
+                data: '''
 CASHIER Z STORE
 Invoice: $invoiceId
 Total: ${total.toStringAsFixed(2)}
@@ -127,5 +127,7 @@ Total: ${total.toStringAsFixed(2)}
     ),
   );
 
-  await Printing.layoutPdf(onLayout: (format) async => pdf.save());
+  await Printing.layoutPdf(
+    onLayout: (format) async => pdf.save(),
+  );
 }
