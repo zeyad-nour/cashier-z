@@ -8,6 +8,13 @@ class OptionsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [ListProductView(), Spacer(), ProductBasketView()]);
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(child: ListProductView()),
+        const SizedBox(width: 10),
+        Expanded(child: ProductBasketView()),
+      ],
+    );
   }
 }

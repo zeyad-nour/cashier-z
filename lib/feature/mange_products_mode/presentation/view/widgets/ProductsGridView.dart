@@ -19,9 +19,7 @@ class ProductsGridView extends StatelessWidget {
         }
 
         if (products.isEmpty) {
-          return const Center(
-            child: Text("No Products Yet"),
-          );
+          return const Center(child: Text("No Products Yet"));
         }
 
         return GridView.builder(
@@ -30,14 +28,12 @@ class ProductsGridView extends StatelessWidget {
           itemCount: products.length, // 👈 مهم جدًا
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 10,
-            childAspectRatio: 0.8,
+            crossAxisSpacing: 0,
+            mainAxisSpacing: 0,
+            childAspectRatio: 0.9998,
           ),
           itemBuilder: (context, index) {
-            return CardInfoProducts(
-              product: products[index],
-            );
+            return CardInfoProducts(product: products[index]);
           },
         );
       },

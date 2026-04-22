@@ -22,20 +22,14 @@ class CardInfoProducts extends StatelessWidget {
           children: [
             Text(
               product.name,
-              style: const TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 22,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 22),
             ),
 
             const SizedBox(height: 10),
 
             Text(
               product.barcode,
-              style: const TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
             ),
 
             const Spacer(),

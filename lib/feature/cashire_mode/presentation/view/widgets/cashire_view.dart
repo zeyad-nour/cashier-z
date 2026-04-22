@@ -13,25 +13,20 @@ class CashierView extends StatelessWidget {
     return Column(
       children: [
         const SizedBox(height: 20),
-    
-        Expanded(
-          child: Column(
-            children: [
-              ScanWidget(
-                onScan: (barcode) {
-                  context.read<ReceiptCubit>().scan(barcode);
-                },
-              ),
-    
-              const SizedBox(height: 20),
-    
-              const OptionsWidget(),
-            ],
-          ),
+
+        ScanWidget(
+          onScan: (barcode) {
+            context.read<ReceiptCubit>().scan(barcode);
+          },
         ),
-    
+
+        const SizedBox(height: 20),
+
+        // 👇 أهم تعديل هنا
+        const Expanded(child: SingleChildScrollView(child: OptionsWidget())),
+
         const SizedBox(height: 10),
-    
+
         const InvoiceWidget(),
       ],
     );
