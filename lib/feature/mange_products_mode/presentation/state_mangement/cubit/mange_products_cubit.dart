@@ -8,37 +8,27 @@ import 'package:cashier_z/feature/mange_products_mode/data/models/product_model.
 part 'mange_products_state.dart';
 
 class MangeProductsCubit extends Cubit<MangeProductsState> {
-  MangeProductsCubit() : super(MangeProductsInitial()){
-      loadProducts();
+  MangeProductsCubit() : super(MangeProductsInitial()) {
+    loadProducts();
   }
 
-  // =========================
-  // Load all products
-  // =========================
   void loadProducts() {
     final products = HiveHelper.getProducts();
     emit(ProductsLoaded(products));
   }
 
-  // =========================
-  // Scan / Search product
-  // =========================
-void scanBarcode(String barcode) {
-  final product = HiveHelper.getByBarcode(barcode);
+  void scanBarcode(String barcode) {
+    final product = HiveHelper.getByBarcode(barcode);
 
-  if (product != null) {
-    emit(ProductFound(product));
-  } else {
-    emit(ProductNotFound(barcode));
+    if (product != null) {
+      emit(ProductFound(product));
+    } else {
+      emit(ProductNotFound(barcode));
+    }
+
+    loadProducts();
   }
 
-  // 👇 مهم جدًا: refresh list بعد أي scan
-  loadProducts();
-}
-
-  // =========================
-  // Add new product
-  // =========================
   void addProduct({
     required String name,
     required String barcode,
@@ -51,7 +41,11 @@ void scanBarcode(String barcode) {
       return;
     }
 
-    final product = ProductModel(name: name, barcode: barcode, price: price);
+    final product = ProductModel(
+      name: name,
+      barcode: barcode,
+      price: price,
+    );
 
     HiveHelper.addProduct(product);
 
@@ -59,10 +53,10 @@ void scanBarcode(String barcode) {
     loadProducts();
   }
 
-  // =========================
-  // Update price (important for cashier mode too)
-  // =========================
-  void updatePrice({required String barcode, required double newPrice}) {
+  void updatePrice({
+    required String barcode,
+    required double newPrice,
+  }) {
     final product = HiveHelper.getByBarcode(barcode);
 
     if (product == null) {
@@ -74,6 +68,20 @@ void scanBarcode(String barcode) {
     product.save();
 
     emit(ProductUpdated());
+    loadProducts();
+  }
+
+  void deleteProduct(String barcode) {
+    final product = HiveHelper.getByBarcode(barcode);
+
+    if (product == null) {
+      emit(ProductNotFound(barcode));
+      return;
+    }
+
+    product.delete();
+
+    emit(ProductDeleted());
     loadProducts();
   }
 }

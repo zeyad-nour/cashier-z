@@ -1,3 +1,4 @@
+import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/state_mangement/cubit/receipt_cubit.dart';
@@ -26,7 +27,7 @@ class ProductBasket extends StatelessWidget {
               border: Border.all(color: borderAndDivider, width: 1.6),
             ),
             child: items.isEmpty
-                ? const Center(child: Text("No Items"))
+                ? const Center(child: Text(noProducts))
                 : ListView.builder(
                     itemCount: items.length,
                     itemBuilder: (context, index) {

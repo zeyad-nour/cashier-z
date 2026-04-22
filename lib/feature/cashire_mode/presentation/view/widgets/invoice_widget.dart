@@ -1,3 +1,4 @@
+import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:cashier_z/core/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +56,7 @@ class InvoiceWidget extends StatelessWidget {
                     context.read<ReceiptCubit>().printReceiptPdf();
                   },
                   icon: const Icon(Icons.print),
-                  label: const Text("طباعة الفاتورة"),
+                  label: const Text(printInvoicebutton),
                 ),
               ),
             ],

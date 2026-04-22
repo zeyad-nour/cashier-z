@@ -1,3 +1,4 @@
+import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
 class AddOrUpdateProductDialog extends StatefulWidget {
@@ -37,14 +38,14 @@ class _AddOrUpdateProductDialogState
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(widget.isUpdate ? "Update Product" : "Add Product"),
+      title: Text(widget.isUpdate ? updateProduct : addProduct),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (!widget.isUpdate)
             TextField(
               controller: nameController,
-              decoration: const InputDecoration(labelText: "Product Name"),
+              decoration: const InputDecoration(labelText: productName),
             ),
 
           const SizedBox(height: 10),
@@ -52,14 +53,14 @@ class _AddOrUpdateProductDialogState
           TextField(
             controller: priceController,
             keyboardType: TextInputType.number,
-            decoration: const InputDecoration(labelText: "Price"),
+            decoration: const InputDecoration(labelText: priceProduct),
           ),
         ],
       ),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text("Cancel"),
+          child: const Text(cancel),
         ),
         ElevatedButton(
           onPressed: () {
@@ -69,7 +70,7 @@ class _AddOrUpdateProductDialogState
             widget.onSubmit(name, price);
             Navigator.pop(context);
           },
-          child: const Text("Save"),
+          child: const Text(save),
         ),
       ],
     );

@@ -28,3 +28,5 @@ final class ProductsLoaded extends MangeProductsState {
   final List<ProductModel> products;
   ProductsLoaded(this.products);
 }
+
+class ProductDeleted extends MangeProductsState {}

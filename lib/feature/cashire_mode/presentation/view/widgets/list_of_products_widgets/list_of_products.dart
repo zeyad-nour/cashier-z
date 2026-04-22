@@ -1,3 +1,4 @@
+import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:cashier_z/feature/mange_products_mode/data/local/hive_helper.dart';
 import 'package:cashier_z/feature/mange_products_mode/data/models/product_model.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class ListOfProducts extends StatelessWidget {
             final products = box.values.toList();
 
             if (products.isEmpty) {
-              return const Center(child: Text("No Products"));
+              return const Center(child: Text(noProducts));
             }
 
             return ListView.builder(
