@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:cashier_z/core/utils/pdf_invoice.dart';
 import 'package:cashier_z/feature/cashire_mode/data/model/cart_item.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/state_mangement/cubit/receipt_state.dart';
 import 'package:cashier_z/feature/mange_products_mode/data/local/hive_helper.dart';
@@ -72,7 +73,10 @@ class ReceiptCubit extends Cubit<ReceiptState> {
   buffer.writeln("TOTAL: ${state.total.toStringAsFixed(2)}");
   return buffer.toString();
 }
-
+Future<void> printReceipt() async {
+  await printInvoice(state.items, state.total);
+  clear();
+}
 
   void clear() {
     emit(const ReceiptState());

@@ -52,7 +52,8 @@ class InvoiceWidget extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    context.read<ReceiptCubit>().clear();
+                    context.read<ReceiptCubit>().printReceipt();
+
                   },
                   icon: const Icon(Icons.print),
                   label: const Text("طباعة الفاتورة"),
