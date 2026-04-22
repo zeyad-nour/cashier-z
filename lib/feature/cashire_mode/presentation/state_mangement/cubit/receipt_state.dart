@@ -1,6 +1,21 @@
-part of 'receipt_cubit.dart';
 
-@immutable
-sealed class ReceiptState {}
+import 'package:cashier_z/feature/cashire_mode/data/model/cart_item.dart';
 
-final class ReceiptInitial extends ReceiptState {}
+class ReceiptState {
+  final List<CartItem> items;
+
+  const ReceiptState({this.items = const []});
+
+  double get total {
+    return items.fold(
+      0,
+      (sum, item) => sum + item.product.price * item.quantity,
+    );
+  }
+
+  ReceiptState copyWith({List<CartItem>? items}) {
+    return ReceiptState(
+      items: items ?? this.items,
+    );
+  }
+}
