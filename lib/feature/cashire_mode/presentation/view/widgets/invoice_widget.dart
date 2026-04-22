@@ -24,10 +24,10 @@ class InvoiceWidget extends StatelessWidget {
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("الفاتورة",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold)),
+                  Text(
+                    "الفاتورة",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                   Icon(Icons.receipt_long),
                 ],
               ),
@@ -35,8 +35,7 @@ class InvoiceWidget extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("الإجمالي:",
-                      style: TextStyle(fontSize: 16)),
+                  const Text("الإجمالي:", style: TextStyle(fontSize: 16)),
                   Text(
                     "${state.total} EGP",
                     style: const TextStyle(
@@ -52,8 +51,7 @@ class InvoiceWidget extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    context.read<ReceiptCubit>().printReceipt();
-
+                    context.read<ReceiptCubit>().printReceiptEscPos();
                   },
                   icon: const Icon(Icons.print),
                   label: const Text("طباعة الفاتورة"),
