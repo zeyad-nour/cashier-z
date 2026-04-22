@@ -38,6 +38,7 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
 
               pw.Divider(),
 
+
               /// 📞 INFO
               pw.Text("01001386275 / 01090201040"),
               pw.Text("سوهاج - البلينا - الحرجة بالقرعان"),
