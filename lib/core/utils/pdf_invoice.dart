@@ -118,18 +118,7 @@ Future<void> printInvoice(List<CartItem> items, double total) async {
 
               pw.SizedBox(height: 10),
 
-              /// 📊 QR CODE
-              //               pw.BarcodeWidget(
-              //                 barcode: pw.Barcode.qrCode(),
-              //                 width: 120,
-              //                 height: 120,
-              //                 data:
-              //                     '''
-              // STORE: $brandName
-              // INVOICE: $invoiceId
-              // TOTAL: ${total.toStringAsFixed(2)}
-              // ''',
-              //               ),
+           
               pw.SizedBox(height: 10),
 
               pw.Divider(),

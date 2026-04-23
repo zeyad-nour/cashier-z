@@ -22,8 +22,7 @@ class AddOrUpdateProductDialog extends StatefulWidget {
       _AddOrUpdateProductDialogState();
 }
 
-class _AddOrUpdateProductDialogState
-    extends State<AddOrUpdateProductDialog> {
+class _AddOrUpdateProductDialogState extends State<AddOrUpdateProductDialog> {
   late TextEditingController nameController;
   late TextEditingController priceController;
 
@@ -31,8 +30,9 @@ class _AddOrUpdateProductDialogState
   void initState() {
     super.initState();
     nameController = TextEditingController(text: widget.name ?? "");
-    priceController =
-        TextEditingController(text: widget.price?.toString() ?? "");
+    priceController = TextEditingController(
+      text: widget.price?.toString() ?? "",
+    );
   }
 
   @override
@@ -44,6 +44,7 @@ class _AddOrUpdateProductDialogState
         children: [
           if (!widget.isUpdate)
             TextField(
+              autofocus: true,
               controller: nameController,
               decoration: const InputDecoration(labelText: productName),
             ),

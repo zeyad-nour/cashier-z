@@ -14,10 +14,38 @@ class ScanBarCodeField extends StatefulWidget {
 
 class _ScanBarCodeFieldState extends State<ScanBarCodeField> {
   final TextEditingController controller = TextEditingController();
+  final FocusNode focusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    /// 👇 أول ما الصفحة تفتح
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      focusNode.requestFocus();
+    });
+
+    /// 👇 إدارة الفوكس بذكاء
+    focusNode.addListener(() {
+      if (!focusNode.hasFocus) {
+        Future.delayed(const Duration(milliseconds: 100), () {
+          /// 👇 أهم شرط (لو مفيش Dialog فوقي)
+          if (!mounted) return;
+
+          final isCurrentRoute = ModalRoute.of(context)?.isCurrent ?? true;
+
+          if (isCurrentRoute) {
+            focusNode.requestFocus();
+          }
+        });
+      }
+    });
+  }
 
   @override
   void dispose() {
     controller.dispose();
+    focusNode.dispose();
     super.dispose();
   }
 
@@ -27,9 +55,13 @@ class _ScanBarCodeFieldState extends State<ScanBarCodeField> {
       width: MediaQuery.of(context).size.width * 0.5,
       child: TextFormField(
         controller: controller,
+        focusNode: focusNode,
         onFieldSubmitted: (value) {
           widget.onScan?.call(value);
-          controller.clear(); // مهم للكاشير
+          controller.clear();
+
+          /// 👇 يرجع الفوكس بعد الاسكان
+          focusNode.requestFocus();
         },
         decoration: const InputDecoration(
           hintText: titleFieldScan,
