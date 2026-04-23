@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:cashier_z/core/utils/build_receipt.dart';
 import 'package:cashier_z/core/utils/pdf_invoice.dart';
-import 'package:cashier_z/core/utils/print_receipt.dart';
 import 'package:cashier_z/feature/cashire_mode/data/model/cart_item.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/state_mangement/cubit/receipt_state.dart';
 import 'package:cashier_z/feature/mange_products_mode/data/local/hive_helper.dart';
@@ -56,23 +54,5 @@ class ReceiptCubit extends Cubit<ReceiptState> {
   /// 📄 PDF (fallback)
   Future<void> printReceiptPdf() async {
     await printInvoice(state.items, state.total);
-    clear();
-  }
-
-  /// 🖨️ ESC/POS (real printer)
-  Future<void> printReceiptEscPos() async {
-    final bytes = await buildReceipt(
-      state.items,
-      state.total,
-      "CASHIER Z STORE",
-    );
-
-    sendToPrinter(bytes, "YOUR PRINTER NAME");
-
-    clear();
-  }
-
-  void clear() {
-    emit(const ReceiptState());
   }
 }
