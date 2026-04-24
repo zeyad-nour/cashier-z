@@ -50,9 +50,13 @@ class ReceiptCubit extends Cubit<ReceiptState> {
 
     emit(state.copyWith(items: items));
   }
-
+  //clear Basket
+void clearCart() {
+  emit(state.copyWith(items: []));
+}
   /// 📄 PDF (fallback)
   Future<void> printReceiptPdf() async {
     await printInvoice(state.items, state.total);
   }
+
 }

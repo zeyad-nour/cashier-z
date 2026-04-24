@@ -23,10 +23,10 @@ class _CashierViewState extends State<CashierView> {
 
     await Future.delayed(const Duration(milliseconds: 200));
 
-    /// 🖨️ اطبع
+    /// print PDF (fallback)
     await context.read<ReceiptCubit>().printReceiptPdf();
 
-    /// ✅ رجّع الفوكس
+    /// return focus agin
     setState(() => enableFocus = true);
   }
 
@@ -54,7 +54,7 @@ class _CashierViewState extends State<CashierView> {
         const SizedBox(height: 10),
 
         InvoiceWidget(
-          onPrint: () => handlePrint(context), // 👈 الجديد
+          onPrint: () => handlePrint(context), 
         ),
       ],
     );
