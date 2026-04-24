@@ -1,12 +1,23 @@
+
+
 // ignore_for_file: deprecated_member_use
 
 import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:flutter/material.dart';
 
+
+
+
+
 class ScanBarCodeField extends StatefulWidget {
   final Function(String value)? onScan;
+  final bool enableAutoFocus; // 👈 جديد
 
-  const ScanBarCodeField({super.key, this.onScan});
+  const ScanBarCodeField({
+    super.key,
+    this.onScan,
+    this.enableAutoFocus = true,
+  });
 
   @override
   State<ScanBarCodeField> createState() => _ScanBarCodeFieldState();
@@ -20,26 +31,36 @@ class _ScanBarCodeFieldState extends State<ScanBarCodeField> {
   void initState() {
     super.initState();
 
-    /// 👇 أول ما الصفحة تفتح
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      focusNode.requestFocus();
+      if (widget.enableAutoFocus) {
+        focusNode.requestFocus();
+      }
     });
 
-    /// 👇 إدارة الفوكس بذكاء
     focusNode.addListener(() {
-      if (!focusNode.hasFocus) {
+      if (!focusNode.hasFocus && widget.enableAutoFocus) {
         Future.delayed(const Duration(milliseconds: 100), () {
-          /// 👇 أهم شرط (لو مفيش Dialog فوقي)
           if (!mounted) return;
 
-          final isCurrentRoute = ModalRoute.of(context)?.isCurrent ?? true;
+          final isCurrentRoute =
+              ModalRoute.of(context)?.isCurrent ?? true;
 
-          if (isCurrentRoute) {
+          if (isCurrentRoute && widget.enableAutoFocus) {
             focusNode.requestFocus();
           }
         });
       }
     });
+  }
+
+  @override
+  void didUpdateWidget(covariant ScanBarCodeField oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    /// 👇 لو رجعنا enable → رجّع الفوكس
+    if (widget.enableAutoFocus && !oldWidget.enableAutoFocus) {
+      focusNode.requestFocus();
+    }
   }
 
   @override
@@ -60,8 +81,9 @@ class _ScanBarCodeFieldState extends State<ScanBarCodeField> {
           widget.onScan?.call(value);
           controller.clear();
 
-          /// 👇 يرجع الفوكس بعد الاسكان
-          focusNode.requestFocus();
+          if (widget.enableAutoFocus) {
+            focusNode.requestFocus();
+          }
         },
         decoration: const InputDecoration(
           hintText: titleFieldScan,
@@ -71,3 +93,14 @@ class _ScanBarCodeFieldState extends State<ScanBarCodeField> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+

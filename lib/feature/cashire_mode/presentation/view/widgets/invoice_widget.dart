@@ -5,9 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/state_mangement/cubit/receipt_cubit.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/state_mangement/cubit/receipt_state.dart';
 
-
 class InvoiceWidget extends StatelessWidget {
-  const InvoiceWidget({super.key});
+  final VoidCallback onPrint; // 👈 جديد
+
+  const InvoiceWidget({super.key, required this.onPrint});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,6 @@ class InvoiceWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,9 +52,7 @@ class InvoiceWidget extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  onPressed: () {
-                    context.read<ReceiptCubit>().printReceiptPdf();
-                  },
+                  onPressed: onPrint, // 👈 بدل cubit مباشر
                   icon: const Icon(Icons.print),
                   label: const Text(printInvoicebutton),
                 ),
@@ -66,3 +64,4 @@ class InvoiceWidget extends StatelessWidget {
     );
   }
 }
+
