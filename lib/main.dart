@@ -11,8 +11,6 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
   await Hive.openBox<ProductModel>('products_box');
-
-  
   runApp(const MyApp());
 }
 
