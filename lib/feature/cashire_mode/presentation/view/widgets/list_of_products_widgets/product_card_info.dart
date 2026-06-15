@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:cashier_z/core/utils/colors.dart';
 import 'package:cashier_z/feature/mange_products_mode/data/models/product_model.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,9 @@ class ProductCardInfo extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
       child: Card(
-        color: cardsAndContainers,
+        color: product.quantity > 10
+            ? cardsAndContainers
+            : Colors.red.withOpacity(0.8),
         child: ListTile(
           title: Text(
             product.name,
@@ -31,6 +35,14 @@ class ProductCardInfo extends StatelessWidget {
           trailing: Text(
             "${product.price} EGP",
             style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: primaryColor,
+            ),
+          ),
+          leading: Text(
+            product.quantity.toString(),
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               color: primaryColor,

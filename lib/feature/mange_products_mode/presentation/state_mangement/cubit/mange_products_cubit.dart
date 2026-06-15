@@ -12,12 +12,15 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     loadProducts();
   }
 
-
+// New method to load products from Hive and emit the loaded state
   void loadProducts() {
     final products = HiveHelper.getProducts();
     emit(ProductsLoaded(products));
   }
 
+
+
+// New method to scan barcode and check if product exists or No
   void scanBarcode(String barcode) {
     final product = HiveHelper.getByBarcode(barcode);
 
@@ -30,6 +33,7 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     loadProducts();
   }
 
+// Added New Prdoducts 
   void addProduct({
     required String name,
     required String barcode,
@@ -37,24 +41,40 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     required int quantity,
   }) {
     final existing = HiveHelper.getByBarcode(barcode);
-
     if (existing != null) {
       emit(ProductFound(existing));
       return;
     }
-
     final product = ProductModel(
       name: name,
       barcode: barcode,
       price: price,
       quantity: quantity,
     );
-
     HiveHelper.addProduct(product);
-
     emit(ProductAdded(product));
     loadProducts();
   }
+
+  // New methods to update Product Name
+void updateName({
+  required String barcode,
+  required String newName,
+}) {
+  final product = HiveHelper.getByBarcode(barcode);
+
+  if (product == null) {
+    emit(ProductNotFound(barcode));
+    return;
+  }
+
+  product.name = newName;
+  product.save();
+
+  emit(ProductUpdated());
+  loadProducts();
+}
+
 // New method to update price and quantity
   void updatePrice({
     required String barcode,
@@ -75,6 +95,8 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     emit(ProductUpdated());
     loadProducts();
   }
+
+
 // New method to update quantity
   void updateQuantity({required String barcode, required int quantity}) {
     final product = HiveHelper.getByBarcode(barcode);
@@ -90,7 +112,7 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     emit(ProductUpdated());
     loadProducts();
   }
-
+// New method to delete product
   void deleteProduct(String barcode) {
     final product = HiveHelper.getByBarcode(barcode);
 

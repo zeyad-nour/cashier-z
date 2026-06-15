@@ -24,21 +24,16 @@ class CardInfoProducts extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
 
-                // final controller = TextEditingController(
-                //   text: product.price.toString(),
-                // );
-
                 showDialog(
                   context: context,
                   builder: (_) => EditValueDialog(
-                    title: "تعديل السعر",
-                    label: "السعر الجديد",
-                    initialValue: product.price.toString(),
+                    title: "تعديل الاسم",
+                    label: "الاسم الجديد",
+                    initialValue: product.name,
                     onSave: (value) {
-                      context.read<MangeProductsCubit>().updatePrice(
+                      context.read<MangeProductsCubit>().updateName(
                         barcode: product.barcode,
-                        newPrice: double.tryParse(value) ?? 0,
-                        quantity: product.quantity,
+                        newName: value,
                       );
                     },
                   ),
