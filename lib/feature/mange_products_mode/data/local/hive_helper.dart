@@ -19,22 +19,24 @@ class HiveHelper {
   static ProductModel? getByBarcode(String barcode) {
     return getBox().get(barcode);
   }
-static void decreaseQuantity({
-  required String barcode,
-  required int soldQuantity,
-}) {
-  final product = getByBarcode(barcode);
 
-  if (product == null) return;
+  static void decreaseQuantity({
+    required String barcode,
+    required int soldQuantity,
+  }) {
+    final product = getByBarcode(barcode);
 
-  product.quantity -= soldQuantity;
+    if (product == null) return;
 
-  if (product.quantity < 0) {
-    product.quantity = 0;
+    product.quantity -= soldQuantity;
+
+    if (product.quantity < 0) {
+      product.quantity = 0;
+    }
+
+    product.save();
   }
 
-  product.save();
-}
   static void clear() {
     getBox().clear();
   }
