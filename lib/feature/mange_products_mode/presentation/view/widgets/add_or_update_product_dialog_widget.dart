@@ -34,7 +34,7 @@ class _AddOrUpdateProductDialogState extends State<AddOrUpdateProductDialog> {
     priceController = TextEditingController(
       text: widget.price?.toString() ?? "",
     );
-    quantityController = TextEditingController(text: widget.quantity?.toString() ?? "0");
+    quantityController = TextEditingController(text: widget.quantity.toString() ?? "0");
   }
 
   @override
