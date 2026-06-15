@@ -22,8 +22,9 @@ class CardInfoProducts extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
 
-                final controller =
-                    TextEditingController(text: product.price.toString());
+                final controller = TextEditingController(
+                  text: product.price.toString(),
+                );
 
                 showDialog(
                   context: context,
@@ -40,13 +41,11 @@ class CardInfoProducts extends StatelessWidget {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          context
-                              .read<MangeProductsCubit>()
-                              .updatePrice(
-                                barcode: product.barcode,
-                                newPrice:
-                                    double.tryParse(controller.text) ?? 0, quantity: product.quantity,
-                              );
+                          context.read<MangeProductsCubit>().updatePrice(
+                            barcode: product.barcode,
+                            newPrice: double.tryParse(controller.text) ?? 0,
+                            quantity: product.quantity,
+                          );
 
                           Navigator.pop(context);
                         },
@@ -62,9 +61,9 @@ class CardInfoProducts extends StatelessWidget {
               leading: const Icon(Icons.delete, color: Colors.red),
               title: const Text("حذف المنتج"),
               onTap: () {
-                context
-                    .read<MangeProductsCubit>()
-                    .deleteProduct(product.barcode);
+                context.read<MangeProductsCubit>().deleteProduct(
+                  product.barcode,
+                );
 
                 Navigator.pop(context);
               },
@@ -90,7 +89,6 @@ class CardInfoProducts extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
               /// 🔹 NAME + MENU BUTTON
               Row(
                 children: [
@@ -130,7 +128,16 @@ class CardInfoProducts extends StatelessWidget {
               ),
 
               const Spacer(),
-
+              const Divider(),
+              Text(
+                "الكمية: ${product.quantity}",
+                style: TextStyle(
+                  color: product.quantity <= 5 ? Colors.red : Colors.green,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 20,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
               const Divider(),
 
               /// PRICE
