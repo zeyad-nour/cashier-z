@@ -33,6 +33,7 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     required String name,
     required String barcode,
     required double price,
+    required int quantity,
   }) {
     final existing = HiveHelper.getByBarcode(barcode);
 
@@ -44,7 +45,7 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     final product = ProductModel(
       name: name,
       barcode: barcode,
-      price: price,
+      price: price, quantity: quantity,
     );
 
     HiveHelper.addProduct(product);
@@ -56,6 +57,7 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
   void updatePrice({
     required String barcode,
     required double newPrice,
+    required int quantity,
   }) {
     final product = HiveHelper.getByBarcode(barcode);
 
@@ -65,6 +67,7 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     }
 
     product.price = newPrice;
+    product.quantity = quantity;
     product.save();
 
     emit(ProductUpdated());

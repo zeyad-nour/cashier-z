@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cashier_z/core/widgets/scan_widget.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/invoice_widget.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/options_widget.dart';
@@ -16,7 +18,7 @@ class _CashierViewState extends State<CashierView> {
   bool enableFocus = true;
 
   Future<void> handlePrint(BuildContext context) async {
-    /// ❌ وقف الفوكس
+ 
     setState(() => enableFocus = false);
 
     FocusScope.of(context).unfocus();

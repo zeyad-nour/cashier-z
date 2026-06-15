@@ -45,7 +45,7 @@ class CardInfoProducts extends StatelessWidget {
                               .updatePrice(
                                 barcode: product.barcode,
                                 newPrice:
-                                    double.tryParse(controller.text) ?? 0,
+                                    double.tryParse(controller.text) ?? 0, quantity: product.quantity,
                               );
 
                           Navigator.pop(context);

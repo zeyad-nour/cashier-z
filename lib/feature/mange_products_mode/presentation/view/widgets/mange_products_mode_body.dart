@@ -15,16 +15,16 @@ class MangeProductsModeBody extends StatelessWidget {
       listener: (context, state) {
         if (state is ProductNotFound) {
           showDialog(
-
             context: context,
             builder: (_) => AddOrUpdateProductDialog(
               barcode: state.barcode,
               isUpdate: false,
-              onSubmit: (name, price) {
+              onSubmit: (name, price, quantity) {
                 context.read<MangeProductsCubit>().addProduct(
                   name: name,
                   barcode: state.barcode,
                   price: price,
+                  quantity: quantity,
                 );
               },
             ),
@@ -39,10 +39,11 @@ class MangeProductsModeBody extends StatelessWidget {
               name: state.product.name,
               price: state.product.price,
               isUpdate: true,
-              onSubmit: (_, price) {
+              onSubmit: (_, price, quantity) {
                 context.read<MangeProductsCubit>().updatePrice(
                   barcode: state.product.barcode,
                   newPrice: price,
+                  quantity: quantity,
                 );
               },
             ),

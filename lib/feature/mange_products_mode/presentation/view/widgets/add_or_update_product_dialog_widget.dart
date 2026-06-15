@@ -6,7 +6,7 @@ class AddOrUpdateProductDialog extends StatefulWidget {
   final String? name;
   final double? price;
   final bool isUpdate;
-  final Function(String name, double price) onSubmit;
+  final Function(String name, double price, int quantity) onSubmit;
 
   const AddOrUpdateProductDialog({
     super.key,
@@ -25,6 +25,7 @@ class AddOrUpdateProductDialog extends StatefulWidget {
 class _AddOrUpdateProductDialogState extends State<AddOrUpdateProductDialog> {
   late TextEditingController nameController;
   late TextEditingController priceController;
+  late TextEditingController quantityController;
 
   @override
   void initState() {
@@ -56,6 +57,13 @@ class _AddOrUpdateProductDialogState extends State<AddOrUpdateProductDialog> {
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(labelText: priceProduct),
           ),
+          const SizedBox(height: 10),
+          //Number Of Iteams Field
+          // TextField(
+          //   controller: numberOfIteamsController,
+          //   keyboardType: TextInputType.number,
+          //   decoration: const InputDecoration(labelText: numberOfItweam),
+          // ),
         ],
       ),
       actions: [
@@ -67,8 +75,9 @@ class _AddOrUpdateProductDialogState extends State<AddOrUpdateProductDialog> {
           onPressed: () {
             final name = nameController.text;
             final price = double.tryParse(priceController.text) ?? 0;
+            final quantity = int.tryParse(quantityController.text) ?? 0;
 
-            widget.onSubmit(name, price);
+            widget.onSubmit(name, price, quantity);
             Navigator.pop(context);
           },
           child: const Text(save),

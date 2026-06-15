@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/view/widgets/product_basket_widgets/product_basket.dart';
 import 'package:flutter/material.dart';
