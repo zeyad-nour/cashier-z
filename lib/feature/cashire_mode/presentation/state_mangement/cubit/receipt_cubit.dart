@@ -1,7 +1,9 @@
 import 'package:bloc/bloc.dart';
+import 'package:cashier_z/core/utils/invoice_model.dart';
 import 'package:cashier_z/core/utils/pdf_invoice.dart';
 import 'package:cashier_z/feature/cashire_mode/data/model/cart_item.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/state_mangement/cubit/receipt_state.dart';
+import 'package:cashier_z/feature/invoices/data/local/invoice_hive_helper.dart';
 import 'package:cashier_z/feature/mange_products_mode/data/local/hive_helper.dart';
 
 class ReceiptCubit extends Cubit<ReceiptState> {
@@ -14,9 +16,7 @@ class ReceiptCubit extends Cubit<ReceiptState> {
 
     final items = List<CartItem>.from(state.items);
 
-    final index = items.indexWhere(
-      (e) => e.product.barcode == barcode,
-    );
+    final index = items.indexWhere((e) => e.product.barcode == barcode);
 
     if (index != -1) {
       final item = items[index];
@@ -50,25 +50,50 @@ class ReceiptCubit extends Cubit<ReceiptState> {
 
     emit(state.copyWith(items: items));
   }
+
   Future<void> completeSale() async {
-  for (final item in state.items) {
-    HiveHelper.decreaseQuantity(
-      barcode: item.product.barcode,
-      soldQuantity: item.quantity,
-    );
+    for (final item in state.items) {
+      HiveHelper.decreaseQuantity(
+        barcode: item.product.barcode,
+        soldQuantity: item.quantity,
+      );
+    }
+
+    emit(state.copyWith(items: []));
   }
 
-  emit(state.copyWith(items: []));
-}
   //clear Basket
-void clearCart() {
-  emit(state.copyWith(items: []));
-}
+  void clearCart() {
+    emit(state.copyWith(items: []));
+  }
+
+  Future<void> saveInvoice() async {
+    final invoiceItems = state.items.map((item) {
+      return InvoiceItemModel(
+        productName: item.product.name,
+        barcode: item.product.barcode,
+        price: item.product.price,
+        quantity: item.quantity,
+      );
+    }).toList();
+
+    final invoice = InvoiceModel(
+      invoiceId: DateTime.now().millisecondsSinceEpoch.toString(),
+      createdAt: DateTime.now(),
+      total: state.total,
+      items: invoiceItems,
+    );
+
+    await InvoiceHiveHelper.addInvoice(invoice);
+  }
+
   /// 📄 PDF (fallback)
   Future<void> printReceiptPdf() async {
     await printInvoice(state.items, state.total);
-      await completeSale();
+
+    await saveInvoice();
+
+    await completeSale();
 
   }
-
 }
