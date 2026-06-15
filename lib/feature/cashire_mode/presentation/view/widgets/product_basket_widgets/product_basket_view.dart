@@ -47,7 +47,7 @@ class ProductBasketView extends StatelessWidget {
                 if (confirm == true) {
                   context.read<ReceiptCubit>().clearCart();
 
-                  /// 💡 Feedback للمستخدم
+                  ///  Feedback 
                   ScaffoldMessenger.of(
                     context,
                   ).showSnackBar(const SnackBar(content: Text("تم مسح السلة")));

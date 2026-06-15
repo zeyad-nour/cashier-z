@@ -17,7 +17,7 @@ class Purchases extends StatelessWidget {
 
     return Card(
       child: ListTile(
-        title: Text(item.product.name),
+        title: Text(item.product.name, style: TextStyle(fontSize: 20)),
 
         subtitle: Text(item.product.barcode),
 
@@ -31,7 +31,7 @@ class Purchases extends StatelessWidget {
                 icon: const Icon(Icons.remove),
               ),
 
-              Text("${item.quantity}"),
+              Text("${item.quantity}", style: TextStyle(fontSize: 18)),
 
               IconButton(
                 onPressed: () => cubit.increase(index),
@@ -45,6 +45,7 @@ class Purchases extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.green,
+                  fontSize: 18,
                 ),
               ),
             ],
