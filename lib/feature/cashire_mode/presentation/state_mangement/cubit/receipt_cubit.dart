@@ -50,6 +50,16 @@ class ReceiptCubit extends Cubit<ReceiptState> {
 
     emit(state.copyWith(items: items));
   }
+  Future<void> completeSale() async {
+  for (final item in state.items) {
+    HiveHelper.decreaseQuantity(
+      barcode: item.product.barcode,
+      soldQuantity: item.quantity,
+    );
+  }
+
+  emit(state.copyWith(items: []));
+}
   //clear Basket
 void clearCart() {
   emit(state.copyWith(items: []));
@@ -57,6 +67,8 @@ void clearCart() {
   /// 📄 PDF (fallback)
   Future<void> printReceiptPdf() async {
     await printInvoice(state.items, state.total);
+      await completeSale();
+
   }
 
 }

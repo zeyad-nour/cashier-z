@@ -1,3 +1,4 @@
+import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:cashier_z/core/widgets/scan_widget.dart';
 import 'package:cashier_z/feature/mange_products_mode/presentation/state_mangement/cubit/mange_products_cubit.dart';
 import 'package:cashier_z/feature/mange_products_mode/presentation/view/widgets/ProductsGridView.dart';
@@ -17,6 +18,7 @@ class MangeProductsModeBody extends StatelessWidget {
           showDialog(
             context: context,
             builder: (_) => AddOrUpdateProductDialog(
+             quantity: 0,
               barcode: state.barcode,
               isUpdate: false,
               onSubmit: (name, price, quantity) {
@@ -35,6 +37,7 @@ class MangeProductsModeBody extends StatelessWidget {
           showDialog(
             context: context,
             builder: (_) => AddOrUpdateProductDialog(
+              quantity: state.product.quantity,
               barcode: state.product.barcode,
               name: state.product.name,
               price: state.product.price,

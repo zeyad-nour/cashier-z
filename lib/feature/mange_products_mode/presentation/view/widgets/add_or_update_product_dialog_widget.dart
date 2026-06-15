@@ -7,14 +7,14 @@ class AddOrUpdateProductDialog extends StatefulWidget {
   final double? price;
   final bool isUpdate;
   final Function(String name, double price, int quantity) onSubmit;
-
+final int quantity;
   const AddOrUpdateProductDialog({
     super.key,
     required this.barcode,
     this.name,
     this.price,
     required this.isUpdate,
-    required this.onSubmit,
+    required this.onSubmit,required this.quantity,
   });
 
   @override
@@ -34,6 +34,7 @@ class _AddOrUpdateProductDialogState extends State<AddOrUpdateProductDialog> {
     priceController = TextEditingController(
       text: widget.price?.toString() ?? "",
     );
+    quantityController = TextEditingController(text: widget.quantity?.toString() ?? "0");
   }
 
   @override
@@ -59,11 +60,11 @@ class _AddOrUpdateProductDialogState extends State<AddOrUpdateProductDialog> {
           ),
           const SizedBox(height: 10),
           //Number Of Iteams Field
-          // TextField(
-          //   controller: numberOfIteamsController,
-          //   keyboardType: TextInputType.number,
-          //   decoration: const InputDecoration(labelText: numberOfItweam),
-          // ),
+          TextField(
+            controller: quantityController,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(labelText: numberOfItweam),
+          ),
         ],
       ),
       actions: [

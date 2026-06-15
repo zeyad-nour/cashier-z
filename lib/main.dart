@@ -10,19 +10,19 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ProductModelAdapter());
-  await Hive.openBox<ProductModel>('products_box');
+  await Hive.openBox<ProductModel>('products_box_2');
+
+
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key}); 
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (_) => MangeProductsCubit()..loadProducts(),
-        ),
+        BlocProvider(create: (_) => MangeProductsCubit()..loadProducts()),
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
