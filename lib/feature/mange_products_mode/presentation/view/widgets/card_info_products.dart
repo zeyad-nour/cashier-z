@@ -1,6 +1,7 @@
 import 'package:cashier_z/core/utils/colors.dart';
 import 'package:cashier_z/feature/mange_products_mode/data/models/product_model.dart';
 import 'package:cashier_z/feature/mange_products_mode/presentation/state_mangement/cubit/mange_products_cubit.dart';
+import 'package:cashier_z/feature/mange_products_mode/presentation/view/widgets/edite_value_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,47 +17,92 @@ class CardInfoProducts extends StatelessWidget {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            //Edite Price
+            ListTile(
+              leading: const Icon(Icons.edit, color: Colors.blue),
+              title: const Text("تعديل الاسم"),
+              onTap: () {
+                Navigator.pop(context);
+
+                // final controller = TextEditingController(
+                //   text: product.price.toString(),
+                // );
+
+                showDialog(
+                  context: context,
+                  builder: (_) => EditValueDialog(
+                    title: "تعديل السعر",
+                    label: "السعر الجديد",
+                    initialValue: product.price.toString(),
+                    onSave: (value) {
+                      context.read<MangeProductsCubit>().updatePrice(
+                        barcode: product.barcode,
+                        newPrice: double.tryParse(value) ?? 0,
+                        quantity: product.quantity,
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
             ListTile(
               leading: const Icon(Icons.edit, color: Colors.blue),
               title: const Text("تعديل السعر"),
               onTap: () {
                 Navigator.pop(context);
 
-                final controller = TextEditingController(
-                  text: product.price.toString(),
-                );
+                // final controller = TextEditingController(
+                //   text: product.price.toString(),
+                // );
 
                 showDialog(
                   context: context,
-                  builder: (_) => AlertDialog(
-                    title: const Text("تعديل السعر"),
-                    content: TextField(
-                      controller: controller,
-                      keyboardType: TextInputType.number,
-                    ),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: const Text("إلغاء"),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          context.read<MangeProductsCubit>().updatePrice(
-                            barcode: product.barcode,
-                            newPrice: double.tryParse(controller.text) ?? 0,
-                            quantity: product.quantity,
-                          );
-
-                          Navigator.pop(context);
-                        },
-                        child: const Text("حفظ"),
-                      ),
-                    ],
+                  builder: (_) => EditValueDialog(
+                    title: "تعديل السعر",
+                    label: "السعر الجديد",
+                    initialValue: product.price.toString(),
+                    onSave: (value) {
+                      context.read<MangeProductsCubit>().updatePrice(
+                        barcode: product.barcode,
+                        newPrice: double.tryParse(value) ?? 0,
+                        quantity: product.quantity,
+                      );
+                    },
                   ),
                 );
               },
             ),
 
+            //Edite Quantity
+            ListTile(
+              leading: const Icon(
+                Icons.edit_calendar_outlined,
+                color: Colors.red,
+              ),
+              title: const Text("تعديل الكمية"),
+              onTap: () {
+                Navigator.pop(context);
+
+                // final controller = TextEditingController(
+                //   text: product.quantity.toString(),
+                // );
+
+                showDialog(
+                  context: context,
+                  builder: (_) => EditValueDialog(
+                    title: "تعديل الكمية",
+                    label: "الكمية الجديدة",
+                    initialValue: product.quantity.toString(),
+                    onSave: (value) {
+                      context.read<MangeProductsCubit>().updateQuantity(
+                        barcode: product.barcode,
+                        quantity: int.tryParse(value) ?? 0,
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
             ListTile(
               leading: const Icon(Icons.delete, color: Colors.red),
               title: const Text("حذف المنتج"),

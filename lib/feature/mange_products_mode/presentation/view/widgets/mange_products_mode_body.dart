@@ -1,4 +1,3 @@
-import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:cashier_z/core/widgets/scan_widget.dart';
 import 'package:cashier_z/feature/mange_products_mode/presentation/state_mangement/cubit/mange_products_cubit.dart';
 import 'package:cashier_z/feature/mange_products_mode/presentation/view/widgets/ProductsGridView.dart';

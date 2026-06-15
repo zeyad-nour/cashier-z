@@ -12,6 +12,7 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     loadProducts();
   }
 
+
   void loadProducts() {
     final products = HiveHelper.getProducts();
     emit(ProductsLoaded(products));
@@ -45,7 +46,8 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     final product = ProductModel(
       name: name,
       barcode: barcode,
-      price: price, quantity: quantity,
+      price: price,
+      quantity: quantity,
     );
 
     HiveHelper.addProduct(product);
@@ -53,7 +55,7 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     emit(ProductAdded(product));
     loadProducts();
   }
-
+// New method to update price and quantity
   void updatePrice({
     required String barcode,
     required double newPrice,
@@ -67,6 +69,21 @@ class MangeProductsCubit extends Cubit<MangeProductsState> {
     }
 
     product.price = newPrice;
+    product.quantity = quantity;
+    product.save();
+
+    emit(ProductUpdated());
+    loadProducts();
+  }
+// New method to update quantity
+  void updateQuantity({required String barcode, required int quantity}) {
+    final product = HiveHelper.getByBarcode(barcode);
+
+    if (product == null) {
+      emit(ProductNotFound(barcode));
+      return;
+    }
+
     product.quantity = quantity;
     product.save();
 
