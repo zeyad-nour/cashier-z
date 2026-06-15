@@ -18,3 +18,4 @@ const String cancel = "الغاء";
 const String noProducts = "لا يوجد منتجات حتي الان";
 const String printInvoicebutton = "طباعة الفاتورة";
 const String numberOfItweam = "عدد العناصر";
+const String password = "123456";

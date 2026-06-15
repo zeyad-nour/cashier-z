@@ -1,5 +1,6 @@
 import 'package:cashier_z/core/utils/app_strings.dart';
 import 'package:cashier_z/core/utils/colors.dart';
+import 'package:cashier_z/feature/dash_bord/presentation/view/dash_bord.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -21,7 +22,19 @@ class CustomAppBar extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Icon(Icons.qr_code, color: primaryColor, size: 40),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => DashBord()),
+              );
+            },
+            icon: Icon(
+              Icons.admin_panel_settings_outlined,
+              color: primaryColor,
+              size: 40,
+            ),
+          ),
         ],
       ),
     );
