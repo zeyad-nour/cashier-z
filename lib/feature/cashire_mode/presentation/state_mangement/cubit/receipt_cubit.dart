@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, unnecessary_import
+
 import 'package:bloc/bloc.dart';
 import 'package:cashier_z/core/utils/invoice_model.dart';
 import 'package:cashier_z/core/utils/pdf_invoice.dart';
