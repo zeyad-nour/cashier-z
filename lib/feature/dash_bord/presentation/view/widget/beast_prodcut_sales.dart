@@ -15,10 +15,7 @@ class BestProductSales extends StatelessWidget {
           children: [
             const Text(
               "أفضل المنتجات مبيعاً",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-              ),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             const Divider(),
 
@@ -26,32 +23,23 @@ class BestProductSales extends StatelessWidget {
               child: BlocBuilder<DashboardCubit, DashboardState>(
                 builder: (context, state) {
                   if (state is DashboardLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const Center(child: CircularProgressIndicator());
                   }
 
                   if (state is DashboardError) {
-                    return Center(
-                      child: Text(state.message),
-                    );
+                    return Center(child: Text(state.message));
                   }
 
                   if (state is DashboardLoaded) {
                     return ListView.builder(
                       itemCount: state.bestSellingProducts.length,
                       itemBuilder: (context, index) {
-                        final product =
-                            state.bestSellingProducts[index];
+                        final product = state.bestSellingProducts[index];
 
                         return ListTile(
-                          leading: CircleAvatar(
-                            child: Text("${index + 1}"),
-                          ),
+                          leading: CircleAvatar(child: Text("${index + 1}")),
                           title: Text(product.productName),
-                          trailing: Text(
-                            "${product.quantitySold}",
-                          ),
+                          trailing: Text("${product.quantitySold}"),
                         );
                       },
                     );
