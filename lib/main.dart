@@ -22,7 +22,6 @@ void main() async {
   Hive.registerAdapter(InvoiceItemModelAdapter());
 
   await Hive.openBox<ProductModel>('products_box_2');
-
   await Hive.openBox<InvoiceModel>('invoices_box');
 
   runApp(const MyApp());
