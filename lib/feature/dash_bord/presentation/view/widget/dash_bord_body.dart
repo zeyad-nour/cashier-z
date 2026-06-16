@@ -1,4 +1,4 @@
-import 'package:cashier_z/feature/dash_bord/presentation/view/widget/dash_bord_card.dart';
+import 'package:cashier_z/feature/dash_bord/presentation/view/widget/dash_bord_cards.dart';
 import 'package:cashier_z/feature/dash_bord/presentation/view/widget/dash_bord_header.dart';
 import 'package:cashier_z/feature/dash_bord/presentation/view/widget/low_stock_list.dart';
 import 'package:cashier_z/feature/dash_bord/presentation/view/widget/recent_invoices.dart';
