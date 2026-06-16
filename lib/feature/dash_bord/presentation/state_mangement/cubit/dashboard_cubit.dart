@@ -14,7 +14,11 @@ class DashboardCubit extends Cubit<DashboardState> {
 
       final Map<String, int> salesMap = {};
 
+      double totalSales = 0;
+
       for (final invoice in invoices) {
+        totalSales += invoice.total; //sum all invoices
+
         for (final item in invoice.items) {
           salesMap.update(
             item.productName,
@@ -30,7 +34,32 @@ class DashboardCubit extends Cubit<DashboardState> {
 
       products.sort((a, b) => b.quantitySold.compareTo(a.quantitySold));
 
-      emit(DashboardLoaded(bestSellingProducts: products.take(10).toList()));
+      emit(
+        DashboardLoaded(
+          bestSellingProducts: products,
+          totalSales: totalSales,
+          invoicesCount: invoices.length,
+        ),
+      );
+    } catch (e) {
+      emit(DashboardError(e.toString()));
+    }
+  }
+
+  //delete bestSellingProducts and all register
+  Future<void> clearDashboardData() async {
+    emit(DashboardLoading());
+
+    try {
+      await InvoiceHiveHelper.clearInvoices();
+
+      emit(
+        DashboardLoaded(
+          bestSellingProducts: [],
+          totalSales: 0,
+          invoicesCount: 0,
+        ),
+      );
     } catch (e) {
       emit(DashboardError(e.toString()));
     }

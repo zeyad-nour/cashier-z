@@ -1,4 +1,5 @@
 import 'package:cashier_z/core/utils/colors.dart';
+import 'package:cashier_z/feature/dash_bord/presentation/view/widget/sales_widget/Invoice_and_sales_record_body.dart';
 import 'package:cashier_z/feature/dash_bord/presentation/view/widget/beast_prodcut_sales.dart';
 import 'package:cashier_z/feature/dash_bord/presentation/view/widget/custom_header_widget.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,13 @@ class DashBordBody extends StatelessWidget {
         Divider(),
         Center(
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => InvoiceAndSalesRecordBody(),
+                ),
+              );
+            },
             child: Container(
               alignment: Alignment.center,
               width: MediaQuery.sizeOf(context).width * 0.1,

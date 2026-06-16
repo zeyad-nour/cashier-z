@@ -22,4 +22,5 @@ class InvoiceHiveHelper {
   static Future<void> clearInvoices() async {
     await getBox().clear();
   }
+
 }

@@ -3,8 +3,11 @@ import 'package:cashier_z/core/utils/invoice_model.dart';
 import 'package:cashier_z/core/utils/pdf_invoice.dart';
 import 'package:cashier_z/feature/cashire_mode/data/model/cart_item.dart';
 import 'package:cashier_z/feature/cashire_mode/presentation/state_mangement/cubit/receipt_state.dart';
+import 'package:cashier_z/feature/dash_bord/presentation/state_mangement/cubit/dashboard_cubit.dart';
 import 'package:cashier_z/feature/invoices/data/local/invoice_hive_helper.dart';
 import 'package:cashier_z/feature/mange_products_mode/data/local/hive_helper.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ReceiptCubit extends Cubit<ReceiptState> {
   ReceiptCubit() : super(const ReceiptState());
@@ -88,12 +91,11 @@ class ReceiptCubit extends Cubit<ReceiptState> {
   }
 
   /// 📄 PDF (fallback)
-  Future<void> printReceiptPdf() async {
-    await printInvoice(state.items, state.total);
+Future<void> printReceiptPdf(BuildContext context) async {
+  await printInvoice(state.items, state.total);
+  await saveInvoice();
+  await completeSale();
 
-    await saveInvoice();
-
-    await completeSale();
-
-  }
+  context.read<DashboardCubit>().loadDashboard();
+}
 }

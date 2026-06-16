@@ -1,3 +1,4 @@
+import 'package:cashier_z/core/utils/colors.dart';
 import 'package:cashier_z/feature/dash_bord/presentation/state_mangement/cubit/dashboard_cubit.dart';
 import 'package:cashier_z/feature/dash_bord/presentation/state_mangement/cubit/dashboard_state.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +39,14 @@ class BestProductSales extends StatelessWidget {
 
                         return ListTile(
                           leading: CircleAvatar(child: Text("${index + 1}")),
-                          title: Text(product.productName),
-                          trailing: Text("${product.quantitySold}"),
+                          title: Text(
+                            product.productName,
+                            style: TextStyle(fontSize: 25, color: primaryColor),
+                          ),
+                          trailing: Text(
+                            "${product.quantitySold}",
+                            style: TextStyle(fontSize: 25, color: Colors.red),
+                          ),
                         );
                       },
                     );
