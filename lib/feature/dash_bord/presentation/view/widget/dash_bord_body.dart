@@ -27,7 +27,7 @@ class DashBordBody extends StatelessWidget {
         ),
         Divider(),
         //Orderd Sales
-        BeastProdcutSales(),
+        Expanded(child: BestProductSales()),
       ],
     );
   }
