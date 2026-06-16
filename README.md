@@ -123,21 +123,12 @@ Scan Product → Add to Cart → Generate Invoice → Save to Hive → Update St
 
 ---
 
-# 🔮 Future Features
 
-- Cloud sync (Firebase)
-- Multi-user system
-- Charts & analytics graphs
-- Discount & tax system
-- Inventory alerts
-- Thermal printer support
-
----
 
 # 👨‍💻 Developer
 
 Zeyad Ahmed Nour  
-Flutter Developer | Computer Science Student
+Flutter Developer | Computer Science 
 
 GitHub: [https://github.com/zeyad-nour]  
 
